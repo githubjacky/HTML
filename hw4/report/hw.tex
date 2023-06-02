@@ -1,0 +1,608 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[a4paper,text={16.5cm,25.2cm},centering]{geometry}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\Prob}{\mathbb{P}}
+
+
+\usepackage{bbm}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{hyperref}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.2ex}
+
+
+\hypersetup
+       {   pdfauthor = { Hsiu Hsuan Yeh },
+           pdftitle={ HW4 for Machine Learning },
+           colorlinks=TRUE,
+           linkcolor=black,
+           citecolor=blue,
+           urlcolor=blue
+       }
+
+\title{ HW4 for Machine Learning }
+
+\author{ Hsiu Hsuan Yeh }
+
+\date{ 11th May 2023 }
+
+\usepackage{upquote}
+\usepackage{listings}
+\usepackage{xcolor}
+\lstset{
+    basicstyle=\ttfamily\footnotesize,
+    upquote=true,
+    breaklines=true,
+    breakindent=0pt,
+    keepspaces=true,
+    showspaces=false,
+    columns=fullflexible,
+    showtabs=false,
+    showstringspaces=false,
+    escapeinside={(*@}{@*)},
+    extendedchars=true,
+}
+\newcommand{\HLJLt}[1]{#1}
+\newcommand{\HLJLw}[1]{#1}
+\newcommand{\HLJLe}[1]{#1}
+\newcommand{\HLJLeB}[1]{#1}
+\newcommand{\HLJLo}[1]{#1}
+\newcommand{\HLJLk}[1]{\textcolor[RGB]{148,91,176}{\textbf{#1}}}
+\newcommand{\HLJLkc}[1]{\textcolor[RGB]{59,151,46}{\textit{#1}}}
+\newcommand{\HLJLkd}[1]{\textcolor[RGB]{214,102,97}{\textit{#1}}}
+\newcommand{\HLJLkn}[1]{\textcolor[RGB]{148,91,176}{\textbf{#1}}}
+\newcommand{\HLJLkp}[1]{\textcolor[RGB]{148,91,176}{\textbf{#1}}}
+\newcommand{\HLJLkr}[1]{\textcolor[RGB]{148,91,176}{\textbf{#1}}}
+\newcommand{\HLJLkt}[1]{\textcolor[RGB]{148,91,176}{\textbf{#1}}}
+\newcommand{\HLJLn}[1]{#1}
+\newcommand{\HLJLna}[1]{#1}
+\newcommand{\HLJLnb}[1]{#1}
+\newcommand{\HLJLnbp}[1]{#1}
+\newcommand{\HLJLnc}[1]{#1}
+\newcommand{\HLJLncB}[1]{#1}
+\newcommand{\HLJLnd}[1]{\textcolor[RGB]{214,102,97}{#1}}
+\newcommand{\HLJLne}[1]{#1}
+\newcommand{\HLJLneB}[1]{#1}
+\newcommand{\HLJLnf}[1]{\textcolor[RGB]{66,102,213}{#1}}
+\newcommand{\HLJLnfm}[1]{\textcolor[RGB]{66,102,213}{#1}}
+\newcommand{\HLJLnp}[1]{#1}
+\newcommand{\HLJLnl}[1]{#1}
+\newcommand{\HLJLnn}[1]{#1}
+\newcommand{\HLJLno}[1]{#1}
+\newcommand{\HLJLnt}[1]{#1}
+\newcommand{\HLJLnv}[1]{#1}
+\newcommand{\HLJLnvc}[1]{#1}
+\newcommand{\HLJLnvg}[1]{#1}
+\newcommand{\HLJLnvi}[1]{#1}
+\newcommand{\HLJLnvm}[1]{#1}
+\newcommand{\HLJLl}[1]{#1}
+\newcommand{\HLJLld}[1]{\textcolor[RGB]{148,91,176}{\textit{#1}}}
+\newcommand{\HLJLs}[1]{\textcolor[RGB]{201,61,57}{#1}}
+\newcommand{\HLJLsa}[1]{\textcolor[RGB]{201,61,57}{#1}}
+\newcommand{\HLJLsb}[1]{\textcolor[RGB]{201,61,57}{#1}}
+\newcommand{\HLJLsc}[1]{\textcolor[RGB]{201,61,57}{#1}}
+\newcommand{\HLJLsd}[1]{\textcolor[RGB]{201,61,57}{#1}}
+\newcommand{\HLJLsdB}[1]{\textcolor[RGB]{201,61,57}{#1}}
+\newcommand{\HLJLsdC}[1]{\textcolor[RGB]{201,61,57}{#1}}
+\newcommand{\HLJLse}[1]{\textcolor[RGB]{59,151,46}{#1}}
+\newcommand{\HLJLsh}[1]{\textcolor[RGB]{201,61,57}{#1}}
+\newcommand{\HLJLsi}[1]{#1}
+\newcommand{\HLJLso}[1]{\textcolor[RGB]{201,61,57}{#1}}
+\newcommand{\HLJLsr}[1]{\textcolor[RGB]{201,61,57}{#1}}
+\newcommand{\HLJLss}[1]{\textcolor[RGB]{201,61,57}{#1}}
+\newcommand{\HLJLssB}[1]{\textcolor[RGB]{201,61,57}{#1}}
+\newcommand{\HLJLnB}[1]{\textcolor[RGB]{59,151,46}{#1}}
+\newcommand{\HLJLnbB}[1]{\textcolor[RGB]{59,151,46}{#1}}
+\newcommand{\HLJLnfB}[1]{\textcolor[RGB]{59,151,46}{#1}}
+\newcommand{\HLJLnh}[1]{\textcolor[RGB]{59,151,46}{#1}}
+\newcommand{\HLJLni}[1]{\textcolor[RGB]{59,151,46}{#1}}
+\newcommand{\HLJLnil}[1]{\textcolor[RGB]{59,151,46}{#1}}
+\newcommand{\HLJLnoB}[1]{\textcolor[RGB]{59,151,46}{#1}}
+\newcommand{\HLJLoB}[1]{\textcolor[RGB]{102,102,102}{\textbf{#1}}}
+\newcommand{\HLJLow}[1]{\textcolor[RGB]{102,102,102}{\textbf{#1}}}
+\newcommand{\HLJLp}[1]{#1}
+\newcommand{\HLJLc}[1]{\textcolor[RGB]{153,153,119}{\textit{#1}}}
+\newcommand{\HLJLch}[1]{\textcolor[RGB]{153,153,119}{\textit{#1}}}
+\newcommand{\HLJLcm}[1]{\textcolor[RGB]{153,153,119}{\textit{#1}}}
+\newcommand{\HLJLcp}[1]{\textcolor[RGB]{153,153,119}{\textit{#1}}}
+\newcommand{\HLJLcpB}[1]{\textcolor[RGB]{153,153,119}{\textit{#1}}}
+\newcommand{\HLJLcs}[1]{\textcolor[RGB]{153,153,119}{\textit{#1}}}
+\newcommand{\HLJLcsB}[1]{\textcolor[RGB]{153,153,119}{\textit{#1}}}
+\newcommand{\HLJLg}[1]{#1}
+\newcommand{\HLJLgd}[1]{#1}
+\newcommand{\HLJLge}[1]{#1}
+\newcommand{\HLJLgeB}[1]{#1}
+\newcommand{\HLJLgh}[1]{#1}
+\newcommand{\HLJLgi}[1]{#1}
+\newcommand{\HLJLgo}[1]{#1}
+\newcommand{\HLJLgp}[1]{#1}
+\newcommand{\HLJLgs}[1]{#1}
+\newcommand{\HLJLgsB}[1]{#1}
+\newcommand{\HLJLgt}[1]{#1}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Multiple Choice}
+\subsection{1. (a)}
+\[
+\frac{ \partial }{ \partial w } ( \frac{1}{N}\Sigma_{n=1}^N (wx_n - y_n)^2 + \frac{\lambda}{N}w^2 )
+= \frac{1}{N}\Sigma_{n=1}^N (2(wx_n-y_n)x_n) + \frac{2\lambda w}{N}
+\]
+\[
+\text{by FOC, } \frac{1}{N}\Sigma_{n=1}^N (2(wx_n-y_n)x_n) + \frac{2\lambda w}{N} = 0
+\Rightarrow C 
+= w\ast^2 = (\frac{ \Sigma_{n=1}^N x_ny_n }{ \Sigma_{n=1}^N x_n^2+\lambda} )^2
+\]
+\subsection{2. (b)}
+
+\begin{align}
+    \Phi(x) &= \Gamma^{-1}x \\
+    \frac{\partial}{\partial \tilde{w}} \frac{1}{N}\Sigma_{n=1}^N (\tilde{w}\Phi(x_n)-y_n)^2
+    &= \frac{2}{N} ( \Gamma^{-1}X^TX\Gamma^{-1}\tilde{w} - \Gamma^{-1}X^Ty ) \\
+    \frac{\partial}{\partial \tilde{w}} \frac{\lambda}{N}\tilde{w}^T\tilde{w}
+    &= \frac{2\lambda}{N} \tilde{w} \\
+    \text{by FOC, } \frac{2}{N} ( \Gamma^{-1}X^TX\Gamma^{-1}\tilde{w} - \Gamma^{-1}X^Ty ) + \frac{2\lambda}{N} \tilde{w} 
+    &= 0 \\
+    \Rightarrow (X^TX(\Gamma^{-1}\tilde{w}) - X^Ty) + \lambda\Gamma\tilde{w} = 0
+\end{align}
+
+\begin{align}
+    \frac{\partial}{\partial w} ( \frac{1}{N}\Sigma_{n=1}^N (wx_n-y_n)^2 + \frac{\lambda}{N}\Omega(w) )
+    &= \frac{2}{N} (X^TXw - X^Ty) + \frac{\lambda}{N} \Omega'(w) \\
+    \text{by FOC, } \frac{2}{N} (X^TXw - X^Ty) + \frac{\lambda}{N} \Omega'(w) 
+    &= 0 \\
+    \Rightarrow (X^TXw - X^Ty) + \frac{\lambda}{2} \Omega'(w)= 0
+\end{align}
+\[
+\begin{cases}
+    (X^TX(\Gamma^{-1}\tilde{w}) - X^Ty) + \lambda\Gamma\tilde{w} = 0 \\
+    (X^TXw - X^Ty) + \frac{\lambda}{2}\Omega'(w) = 0
+\end{cases}
+\Rightarrow
+\begin{cases}
+    w = \Gamma^{-1}\tilde{w} \\
+    \Omega(w) = w^T\Gamma^2w
+\end{cases}
+\]
+\subsection{3. (a)}
+
+\begin{align}
+    err(w, x, +1) &= \log(1+\exp(-w^Tx)) = \log{h(x)^{-1}} \\
+    err(w, x, -1) &= \log(1+\exp(w^Tx)) = \log{h(-x)^{-1}}
+\end{align}
+
+\begin{align}
+    err_{\text{smooth}}(w, x, +1) &= (1-\frac{\alpha}{2})\log{h(x)^{-1}} + \frac{\alpha}{2}\log{h(-x)^{-1}} \\
+    err_{\text{smooth}}(w, x, -1) &= (1-\frac{\alpha}{2})\log{h(-x)^{-1}} + \frac{\alpha}{2}\log{h(x)}^{-1}
+\end{align}
+In the following derivation steps, I just take the positive example $err_{\text{smooth}}(w, x, +1)$ as the demostration. The negative example  will have the similar result.
+
+\[
+\begin{split}
+    err_{\text{smooth}}(w, x, +1) 
+    &= (1-\frac{\alpha}{2})\log{h(x)^{-1}} + \frac{\alpha}{2}\log{h(-x)^{-1}} \\
+    &= \log{h(x)^{-1}} + \frac{\alpha}{2}(\log{h(-x)^{-1}} - \log{h(x)^{-1}}) \\
+    &= err(w, x, +1) + \frac{\alpha}{2} ( (\log{\frac{1}{2}} + \log{h(-x)^{-1}}) - (\log{\frac{1}{2}} + \log{h(x)^{-1}}) ) \\
+    &= err(w, x, +1) + \alpha ( \frac{1}{2} \log{\frac{1}{2} h(-x)^{-1}} - \frac{1}{2} \log{\frac{1}{2} h(x)^{-1}} ) \\
+    &= err(w, x, +1) + \alpha ( D_{LK}(P_u||P_h) - \log{\frac{1}{2} h(x)^{-1}} ) \\ 
+    &= err(w, x, +1) + \alpha D_{LK}(P_u||P_h) - \alpha err(w, x, +1) - \alpha \log{\frac{1}{2}} \\
+    &= (1-\alpha) err(w, x, +1) + \alpha D_{LK}(P_u||P_h) - \alpha \log{\frac{1}{2}}
+\end{split}
+\]
+\[
+\text{by FOC, } \frac{\partial}{\partial w} err_{\text{smooth}}(w, x, +1) = 0, 
+\]
+\[
+\Rightarrow  err(w, x, +1) + \frac{\alpha}{1-\alpha} D_{LK}(P_u||P_h) = err(w, x, +1) + \lambda D_{LK}(P_u||P_h) = 0, 
+\Rightarrow \Omega(w, x) = D_{LK}(P_u||P_h)
+\]
+\subsection{4. (b)}
+\[
+\begin{split}
+    E_{loocv} 
+    &= \frac{1}{3} ( (\frac{y_1+y_2}{2} - 1)^2 + (\frac{y_1+1}{2} - y_2)^2 + (\frac{y_2+1}{2} - y_1)^2 ) \\
+    &= \frac{1}{2} (y_1^2 -y_1y_2 + y_2^2 - y_1 - y_2 + 1)
+\end{split}
+\]
+\[
+\Prob (E_{loocv} <= \frac{1}{3}) = \Prob (y_1^2 -y_1y_2 + y_2^2 - y_1 - y_2 + \frac{1}{3} <= 0)
+\]
+Define some variables representing the coefficient of the second order polynomial mentioned above and some others used to calculate the area of the revolutioned ellipse:
+
+$\pagebreak$
+
+\begin{itemize}
+\item coefficient of $y_1^2$: $a=1$
+
+
+\item coefficient of $y_1y_2$: $b=-1$
+
+
+\item coefficient of $y_2^2$: $c=1$
+
+
+\item coefficient of $y_1$: $d=-1$
+
+
+\item coefficient of $y_2$: $e=-1$
+
+
+\item coefficient of constant: f=1/3
+
+\end{itemize}
+
+\begin{align}
+    m &= \frac{2cd-be}{b^2-4ac} &= 1 \\
+    n &= \frac{2ae-bd}{b^2-4ac} &= 1 \\
+    k &=  \frac{1}{am^2+bmn+cn^2-f} &= \frac{3}{2}
+\end{align}
+\[
+\Rightarrow \Prob (E_{loocv} <= \frac{1}{3}) = \frac{\frac{2\pi}{k\sqrt{4ac-b^2}}}{4} = \frac{\pi}{3\sqrt{3}}
+\]
+\subsection{5. (d)}
+\[
+E_{val}(h) = \frac{1}{K}\Sigma_{i=1}^K err(h(x_i), y)
+\]
+Due to the the validation examples are generated through exactyl the data  distribution and the procss is i.i.d as well:
+
+\[
+\begin{split}
+    \text{Variance}(E_{val}(h)) 
+    &= \text{Variance}(\frac{1}{K}\Sigma_{i=1}^K err(h(x_i), y)) \\
+    &= \frac{1}{K^2}*K*\text{Variance}(err(h(x), y) \\
+    &= \frac{1}{K}\text{Variance}(err(h(x), y)  \\
+\end{split}
+\]
+\subsection{6. (d)}
+Because of balanced examples, the one example left out for validation will always  be predicted wrongly. Hence, the  $E_{\text{loocv}}(A_{\text{majority}}) = \frac{1}{2N} \Sigma_{i=1}^{2N} 1 = 1$
+
+\subsection{7. (c)}
+Since the hopothesis is $h(x_i) = 1*sign(x_i - \frac{\min_{\{x_i: y_i=+1\}} x_i + \max_{\{x_i: y_i=-1\}} x_i)}{2})$ and there are only two possible cases which wrong prediction occur in validation that is when validation example $x_i = \min \{x_i: y_i=+1\}$ or $\max \{x_i: y_i=-1\}$. Considering  the worse case which in both cases, predictions are failed. The upper bound: $E_{loocv}(h) = \frac{2}{N}$.
+
+\subsection{8. (e)}
+Because SVM is the extension of perceptron model and in 1D case, the perceptron model is so called "decision stump". As for the hypothesis for the decision stump:  $h(x_i) = 1*sign(x_i - \frac{\min_{\{x_i: y_i=+1\}} x_i + \max_{\{x_i: y_i=-1\}} x_i)}{2})$, we  know that $\theta = \frac{\min_{\{x_i: y_i=+1\}} x_i + \max_{\{x_i: y_i=-1\}} x_i)}{2} = \frac{x_{M+1}+x_M}{2}$  which imply that the largest margin = $\frac{x_{M+1}-x_M}{2}$.
+
+\subsection{9. (e)}
+Denote $w = [w_1, w_2]$. Our objective is to minimize $\frac{1}{2}w^Tw$ which is equivalent to minimize $w_1^2+w_2^2$. The constraints:
+
+
+\begin{align}
+    4w_2+b \ge 1 \\
+    2w_1 + b \le -1126 \\
+    -w_1 + b \ge 1 \\
+    b \ge
+\end{align}
+Solve $w_1, b$ under constraint (17), (18), (19) and solve $w_2, b$ through constraint (16) respectively through linear programming(drawing diagram). Solution is:
+
+\[
+\begin{cases}
+    w_1 &= \frac{-1127}{2}, \text{intersection of two line: } 2w_1+b=-1126, b=1 \\
+    w_2 &= 0, \text{intersection of two line: } 4w_2+b=1, b=1 \\
+    b &= 1
+\end{cases}
+\]
+\subsection{10. (d)}
+By one of the KKT conditions (primal feasible):
+
+
+\begin{align}
+y_i(\Sigma_{n=1}^N y_n \exp(-\gamma||x_n-x_i||^2)) \ge 1, \forall i \\
+\Sigma_{n=1}^N (y_ny_i) \exp(-\gamma||x_n-x_i||^2) \ge 1 \\
+(N-1)\exp(-\gamma\epsilon^2) \ge \Sigma_{n=1}^N (y_ny_i) \exp(-\gamma||x_n-x_i||^2) \ge 1
+\end{align}
+
+The formula $(N-1)\exp(-\gamma\epsilon^2)$, the left part(N-1) side imply there are at  least one example wich has different y with $y_i$ to make "classification". While the right part($\exp(-\gamma\epsilon^2)$) is due to the constraint $|| x_n-x_i || >= \epsilon, \forall n \neq i$
+
+\[
+\Rightarrow 
+    (N-1)\exp(-\gamma\epsilon^2) \ge 1, \gamma \le \frac{log(N-1)}{\epsilon^2}
+\]
+\subsection{11. (d)}
+\[
+\begin{split}
+    \sqrt{|| \phi(x)-\phi(x') ||^2}
+    &= \sqrt{(\phi(x)-\phi(x'))^T(\phi(x)-\phi(x'))} \\
+    &= \sqrt{2-2\exp(-\gamma || x-x' ||^2)} \\
+    &\le \sqrt{2} \approx 1.414
+\end{split}
+\]
+\section{Coding}
+
+
+\begin{lstlisting}
+(*@\HLJLn{{\_}train{\_}x}@*)(*@\HLJLp{,}@*) (*@\HLJLn{train{\_}y}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{read{\_}data}@*)(*@\HLJLp{(}@*)(*@\HLJLs{"{}../train.txt"{}}@*)(*@\HLJLp{)}@*)
+(*@\HLJLn{{\_}test{\_}x}@*)(*@\HLJLp{,}@*) (*@\HLJLn{test{\_}y}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{read{\_}data}@*)(*@\HLJLp{(}@*)(*@\HLJLs{"{}../test.txt"{}}@*)(*@\HLJLp{)}@*)
+(*@\HLJLn{train{\_}x}@*)(*@\HLJLp{,}@*) (*@\HLJLn{test{\_}x}@*) (*@\HLJLoB{=}@*) (*@\HLJLn{polynomial{\_}transform}@*)(*@\HLJLoB{.}@*)(*@\HLJLp{([}@*)(*@\HLJLn{{\_}train{\_}x}@*)(*@\HLJLp{,}@*) (*@\HLJLn{{\_}test{\_}x}@*)(*@\HLJLp{],}@*) (*@\HLJLn{Q}@*)(*@\HLJLoB{=}@*)(*@\HLJLni{4}@*)(*@\HLJLp{)}@*)
+
+(*@\HLJLn{\ensuremath{\lambda}}@*) (*@\HLJLoB{=}@*) (*@\HLJLp{[}@*)(*@\HLJLnfB{1e6}@*)(*@\HLJLp{,}@*) (*@\HLJLnfB{1e3}@*)(*@\HLJLp{,}@*) (*@\HLJLni{1}@*)(*@\HLJLp{,}@*) (*@\HLJLnfB{1e-3}@*)(*@\HLJLp{,}@*) (*@\HLJLnfB{1e-6}@*)(*@\HLJLp{]}@*)
+\end{lstlisting}
+
+
+\subsection{12. (d)}
+
+\begin{lstlisting}
+(*@\HLJLn{c}@*) (*@\HLJLoB{=}@*) (*@\HLJLn{l2{\_}param{\_}transform}@*)(*@\HLJLoB{.}@*)(*@\HLJLp{(}@*)(*@\HLJLn{\ensuremath{\lambda}}@*)(*@\HLJLp{)}@*)
+(*@\HLJLn{models{\_}l2}@*) (*@\HLJLoB{=}@*) (*@\HLJLn{train}@*)(*@\HLJLoB{.}@*)(*@\HLJLp{(}@*)(*@\HLJLn{c}@*)(*@\HLJLp{;}@*) (*@\HLJLn{y}@*)(*@\HLJLoB{=}@*)(*@\HLJLn{train{\_}y}@*)(*@\HLJLp{,}@*) (*@\HLJLn{x}@*)(*@\HLJLoB{=}@*)(*@\HLJLn{train{\_}x}@*)(*@\HLJLp{)}@*)
+
+(*@\HLJLn{idx{\_}l2}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{argmin}@*)(*@\HLJLp{(}@*)(*@\HLJLn{binary{\_}error}@*)(*@\HLJLoB{.}@*)(*@\HLJLp{(}@*)
+    (*@\HLJLn{models{\_}l2}@*)(*@\HLJLp{;}@*) 
+    (*@\HLJLn{y}@*)(*@\HLJLoB{=}@*)(*@\HLJLn{test{\_}y}@*)(*@\HLJLp{,}@*) (*@\HLJLn{x}@*)(*@\HLJLoB{=}@*)(*@\HLJLn{test{\_}x}@*)
+(*@\HLJLp{))}@*)
+(*@\HLJLnd{@printf}@*) (*@\HLJLs{"{}log\ensuremath{\_1}\ensuremath{\_0}(\ensuremath{\lambda})}@*) (*@\HLJLs{=}@*) (*@\HLJLs{{\%}0.1f}@*) (*@\HLJLs{has}@*) (*@\HLJLs{the}@*) (*@\HLJLs{lowest}@*) (*@\HLJLs{outsample}@*) (*@\HLJLs{error"{}}@*) (*@\HLJLnf{log}@*)(*@\HLJLp{(}@*)(*@\HLJLni{10}@*)(*@\HLJLp{,}@*) (*@\HLJLn{\ensuremath{\lambda}}@*)(*@\HLJLp{[}@*)(*@\HLJLn{idx{\_}l2}@*)(*@\HLJLp{])}@*)
+\end{lstlisting}
+
+\begin{lstlisting}
+log(*@\ensuremath{\_1}@*)(*@\ensuremath{\_0}@*)((*@\ensuremath{\lambda}@*)) = 3.0 has the lowest outsample error
+\end{lstlisting}
+
+
+\subsection{13. (c)}
+
+\begin{lstlisting}
+(*@\HLJLn{idx}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{argmin}@*)(*@\HLJLp{(}@*)(*@\HLJLn{binary{\_}error}@*)(*@\HLJLoB{.}@*)(*@\HLJLp{(}@*)
+    (*@\HLJLn{models{\_}l2}@*)(*@\HLJLp{;}@*) 
+    (*@\HLJLn{y}@*)(*@\HLJLoB{=}@*)(*@\HLJLn{train{\_}y}@*)(*@\HLJLp{,}@*) (*@\HLJLn{x}@*)(*@\HLJLoB{=}@*)(*@\HLJLn{train{\_}x}@*)
+(*@\HLJLp{))}@*)
+(*@\HLJLnd{@printf}@*) (*@\HLJLs{"{}log\ensuremath{\_1}\ensuremath{\_0}(\ensuremath{\lambda})}@*) (*@\HLJLs{=}@*) (*@\HLJLs{{\%}0.1f}@*) (*@\HLJLs{has}@*) (*@\HLJLs{the}@*) (*@\HLJLs{lowest}@*) (*@\HLJLs{insample}@*) (*@\HLJLs{error"{}}@*) (*@\HLJLnf{log}@*)(*@\HLJLp{(}@*)(*@\HLJLni{10}@*)(*@\HLJLp{,}@*) (*@\HLJLn{\ensuremath{\lambda}}@*)(*@\HLJLp{[}@*)(*@\HLJLn{idx}@*)(*@\HLJLp{])}@*)
+\end{lstlisting}
+
+\begin{lstlisting}
+log(*@\ensuremath{\_1}@*)(*@\ensuremath{\_0}@*)((*@\ensuremath{\lambda}@*)) = 0.0 has the lowest insample error
+\end{lstlisting}
+
+
+$\pagebreak$
+
+\subsection{14. (d)}
+
+\begin{lstlisting}
+(*@\HLJLn{Random}@*)(*@\HLJLoB{.}@*)(*@\HLJLnf{seed!}@*)(*@\HLJLp{(}@*)(*@\HLJLni{1234}@*)(*@\HLJLp{)}@*)
+(*@\HLJLn{count}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{zeros}@*)(*@\HLJLp{(}@*)(*@\HLJLn{Int64}@*)(*@\HLJLp{,}@*) (*@\HLJLni{5}@*)(*@\HLJLp{)}@*)
+(*@\HLJLk{for}@*) (*@\HLJLn{i}@*) (*@\HLJLoB{=}@*) (*@\HLJLni{1}@*)(*@\HLJLoB{:}@*)(*@\HLJLni{256}@*)
+    (*@\HLJLkd{local}@*) (*@\HLJLn{idx}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{pick{\_}param{\_}val}@*)(*@\HLJLp{(}@*)(*@\HLJLn{train{\_}y}@*)(*@\HLJLp{,}@*) (*@\HLJLn{train{\_}x}@*)(*@\HLJLp{;}@*) (*@\HLJLn{param}@*)(*@\HLJLoB{=}@*)(*@\HLJLn{c}@*)(*@\HLJLp{)}@*)(*@\HLJLoB{.}@*)(*@\HLJLn{idx}@*)
+    (*@\HLJLn{count}@*)(*@\HLJLp{[}@*)(*@\HLJLn{idx}@*)(*@\HLJLp{]}@*) (*@\HLJLoB{+=}@*) (*@\HLJLni{1}@*)
+(*@\HLJLk{end}@*)
+(*@\HLJLn{idx}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{argmax}@*)(*@\HLJLp{(}@*)(*@\HLJLn{count}@*)(*@\HLJLp{)}@*)
+
+(*@\HLJLnd{@printf}@*) (*@\HLJLs{"{}in}@*) (*@\HLJLs{average,}@*) (*@\HLJLs{log\ensuremath{\_1}\ensuremath{\_0}(\ensuremath{\lambda})}@*) (*@\HLJLs{=}@*) (*@\HLJLs{{\%}0.1f}@*) (*@\HLJLs{has}@*) (*@\HLJLs{the}@*) (*@\HLJLs{lowest}@*) (*@\HLJLs{validation}@*) (*@\HLJLs{error"{}}@*) (*@\HLJLnf{log}@*)(*@\HLJLp{(}@*)(*@\HLJLni{10}@*)(*@\HLJLp{,}@*) (*@\HLJLn{\ensuremath{\lambda}}@*)(*@\HLJLp{[}@*)(*@\HLJLn{idx}@*)(*@\HLJLp{])}@*)
+\end{lstlisting}
+
+\begin{lstlisting}
+in average, log(*@\ensuremath{\_1}@*)(*@\ensuremath{\_0}@*)((*@\ensuremath{\lambda}@*)) = 3.0 has the lowest validation error
+\end{lstlisting}
+
+
+\subsection{15. (c)}
+
+\begin{lstlisting}
+(*@\HLJLn{Random}@*)(*@\HLJLoB{.}@*)(*@\HLJLnf{seed!}@*)(*@\HLJLp{(}@*)(*@\HLJLni{1234}@*)(*@\HLJLp{)}@*)
+(*@\HLJLn{eout}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{mean}@*)(*@\HLJLp{([}@*)
+    (*@\HLJLnf{binary{\_}error}@*)(*@\HLJLp{(}@*)
+        (*@\HLJLnf{best{\_}model}@*)(*@\HLJLp{(}@*)(*@\HLJLnf{pick{\_}param{\_}val}@*)(*@\HLJLp{(}@*)(*@\HLJLn{train{\_}y}@*)(*@\HLJLp{,}@*) (*@\HLJLn{train{\_}x}@*)(*@\HLJLp{;}@*) (*@\HLJLn{param}@*)(*@\HLJLoB{=}@*)(*@\HLJLn{c}@*)(*@\HLJLp{));}@*)
+        (*@\HLJLn{y}@*)(*@\HLJLoB{=}@*)(*@\HLJLn{test{\_}y}@*)(*@\HLJLp{,}@*) (*@\HLJLn{x}@*)(*@\HLJLoB{=}@*)(*@\HLJLn{test{\_}x}@*)
+    (*@\HLJLp{)}@*)
+    (*@\HLJLk{for}@*) (*@\HLJLn{i}@*) (*@\HLJLoB{=}@*) (*@\HLJLni{1}@*)(*@\HLJLoB{:}@*)(*@\HLJLni{256}@*)
+(*@\HLJLp{])}@*)
+
+(*@\HLJLnd{@printf}@*) (*@\HLJLs{"{}averaged}@*) (*@\HLJLs{Eout:}@*) (*@\HLJLs{{\%}.5f"{}}@*) (*@\HLJLn{eout}@*)
+\end{lstlisting}
+
+\begin{lstlisting}
+averaged Eout: 0.16778
+\end{lstlisting}
+
+
+\subsection{16. (b)}
+
+\begin{lstlisting}
+(*@\HLJLn{Random}@*)(*@\HLJLoB{.}@*)(*@\HLJLnf{seed!}@*)(*@\HLJLp{(}@*)(*@\HLJLni{1234}@*)(*@\HLJLp{)}@*)
+(*@\HLJLn{eout}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{Vector}@*)(*@\HLJLp{{\{}}@*)(*@\HLJLn{Float64}@*)(*@\HLJLp{{\}}(}@*)(*@\HLJLn{undef}@*)(*@\HLJLp{,}@*) (*@\HLJLni{256}@*)(*@\HLJLp{)}@*)
+(*@\HLJLk{for}@*) (*@\HLJLn{i}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{eachindex}@*)(*@\HLJLp{(}@*)(*@\HLJLn{eout}@*)(*@\HLJLp{)}@*)
+    (*@\HLJLkd{local}@*) (*@\HLJLn{idx}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{pick{\_}param{\_}val}@*)(*@\HLJLp{(}@*)(*@\HLJLn{train{\_}y}@*)(*@\HLJLp{,}@*) (*@\HLJLn{train{\_}x}@*)(*@\HLJLp{;}@*) (*@\HLJLn{param}@*)(*@\HLJLoB{=}@*)(*@\HLJLn{c}@*)(*@\HLJLp{)}@*)(*@\HLJLoB{.}@*)(*@\HLJLn{idx}@*)
+    (*@\HLJLn{eout}@*)(*@\HLJLp{[}@*)(*@\HLJLn{i}@*)(*@\HLJLp{]}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{binary{\_}error}@*)(*@\HLJLp{(}@*)
+        (*@\HLJLnf{train}@*)(*@\HLJLp{(}@*)(*@\HLJLn{c}@*)(*@\HLJLp{[}@*)(*@\HLJLn{idx}@*)(*@\HLJLp{];}@*) (*@\HLJLn{y}@*)(*@\HLJLoB{=}@*)(*@\HLJLn{train{\_}y}@*)(*@\HLJLp{,}@*) (*@\HLJLn{x}@*)(*@\HLJLoB{=}@*)(*@\HLJLn{train{\_}x}@*)(*@\HLJLp{);}@*) (*@\HLJLn{y}@*)(*@\HLJLoB{=}@*)(*@\HLJLn{test{\_}y}@*)(*@\HLJLp{,}@*) (*@\HLJLn{x}@*)(*@\HLJLoB{=}@*)(*@\HLJLn{test{\_}x}@*)
+    (*@\HLJLp{)}@*)
+(*@\HLJLk{end}@*)
+(*@\HLJLnd{@printf}@*) (*@\HLJLs{"{}averaged}@*) (*@\HLJLs{Eout:}@*) (*@\HLJLs{{\%}.5f"{}}@*) (*@\HLJLnf{mean}@*)(*@\HLJLp{(}@*)(*@\HLJLn{eout}@*)(*@\HLJLp{)}@*)
+\end{lstlisting}
+
+\begin{lstlisting}
+averaged Eout: 0.14893
+\end{lstlisting}
+
+
+\subsection{17. (a)}
+
+\begin{lstlisting}
+(*@\HLJLn{Random}@*)(*@\HLJLoB{.}@*)(*@\HLJLnf{seed!}@*)(*@\HLJLp{(}@*)(*@\HLJLni{1234}@*)(*@\HLJLp{)}@*)
+(*@\HLJLn{average{\_}ecv}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{mean}@*)(*@\HLJLp{([}@*)
+    (*@\HLJLnf{pick{\_}param{\_}crossval}@*)(*@\HLJLp{(}@*)(*@\HLJLn{train{\_}y}@*)(*@\HLJLp{,}@*) (*@\HLJLn{train{\_}x}@*)(*@\HLJLp{;}@*) (*@\HLJLn{param}@*)(*@\HLJLoB{=}@*)(*@\HLJLn{c}@*)(*@\HLJLp{,}@*) (*@\HLJLn{K}@*)(*@\HLJLoB{=}@*)(*@\HLJLni{5}@*)(*@\HLJLp{)[}@*)(*@\HLJLni{2}@*)(*@\HLJLp{]}@*)
+    (*@\HLJLk{for}@*) (*@\HLJLn{i}@*) (*@\HLJLoB{=}@*) (*@\HLJLni{1}@*)(*@\HLJLoB{:}@*)(*@\HLJLni{256}@*)
+(*@\HLJLp{])}@*)
+(*@\HLJLnd{@printf}@*) (*@\HLJLs{"{}averaged}@*) (*@\HLJLs{Ecv:}@*) (*@\HLJLs{{\%}.5f"{}}@*) (*@\HLJLn{average{\_}ecv}@*)
+\end{lstlisting}
+
+\begin{lstlisting}
+averaged Ecv: 0.11865
+\end{lstlisting}
+
+
+$\pagebreak$
+
+\subsection{18. (c)}
+
+\begin{lstlisting}
+(*@\HLJLn{c}@*) (*@\HLJLoB{=}@*) (*@\HLJLn{l1{\_}param{\_}transform}@*)(*@\HLJLoB{.}@*)(*@\HLJLp{(}@*)(*@\HLJLn{\ensuremath{\lambda}}@*)(*@\HLJLp{)}@*)
+(*@\HLJLn{models{\_}l1}@*) (*@\HLJLoB{=}@*) (*@\HLJLn{train}@*)(*@\HLJLoB{.}@*)(*@\HLJLp{(}@*)(*@\HLJLn{c}@*)(*@\HLJLp{;}@*) (*@\HLJLn{y}@*)(*@\HLJLoB{=}@*)(*@\HLJLn{train{\_}y}@*)(*@\HLJLp{,}@*) (*@\HLJLn{x}@*)(*@\HLJLoB{=}@*)(*@\HLJLn{train{\_}x}@*)(*@\HLJLp{,}@*) (*@\HLJLn{s}@*)(*@\HLJLoB{=}@*)(*@\HLJLni{6}@*)(*@\HLJLp{)}@*)
+
+(*@\HLJLn{idx{\_}l1}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{argmin}@*)(*@\HLJLp{(}@*)(*@\HLJLn{binary{\_}error}@*)(*@\HLJLoB{.}@*)(*@\HLJLp{(}@*)
+    (*@\HLJLn{models{\_}l1}@*)(*@\HLJLp{;}@*) 
+    (*@\HLJLn{y}@*)(*@\HLJLoB{=}@*)(*@\HLJLn{test{\_}y}@*)(*@\HLJLp{,}@*) (*@\HLJLn{x}@*)(*@\HLJLoB{=}@*)(*@\HLJLn{test{\_}x}@*)
+(*@\HLJLp{))}@*)
+(*@\HLJLnd{@printf}@*) (*@\HLJLs{"{}log\ensuremath{\_1}\ensuremath{\_0}(\ensuremath{\lambda})}@*) (*@\HLJLs{=}@*) (*@\HLJLs{{\%}0.1f}@*) (*@\HLJLs{has}@*) (*@\HLJLs{the}@*) (*@\HLJLs{lowest}@*) (*@\HLJLs{outsample}@*) (*@\HLJLs{error"{}}@*) (*@\HLJLnf{log}@*)(*@\HLJLp{(}@*)(*@\HLJLni{10}@*)(*@\HLJLp{,}@*) (*@\HLJLn{\ensuremath{\lambda}}@*)(*@\HLJLp{[}@*)(*@\HLJLn{idx{\_}l1}@*)(*@\HLJLp{])}@*)
+\end{lstlisting}
+
+\begin{lstlisting}
+log(*@\ensuremath{\_1}@*)(*@\ensuremath{\_0}@*)((*@\ensuremath{\lambda}@*)) = 0.0 has the lowest outsample error
+\end{lstlisting}
+
+
+\subsection{19. (e)}
+
+\begin{lstlisting}
+(*@\HLJLn{model{\_}l1}@*) (*@\HLJLoB{=}@*) (*@\HLJLn{models{\_}l1}@*)(*@\HLJLp{[}@*)(*@\HLJLn{idx{\_}l1}@*)(*@\HLJLp{]}@*)
+(*@\HLJLn{coef{\_}l1}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{get{\_}coefficient}@*)(*@\HLJLp{(}@*)(*@\HLJLn{model{\_}l1}@*)(*@\HLJLp{)}@*)
+
+(*@\HLJLnd{@printf}@*) (*@\HLJLs{"{}there}@*) (*@\HLJLs{are}@*) (*@\HLJLs{{\%}i}@*) (*@\HLJLs{components}@*) (*@\HLJLs{of}@*) (*@\HLJLs{w}@*) (*@\HLJLs{which}@*) (*@\HLJLs{absolute}@*) (*@\HLJLs{value}@*) (*@\HLJLs{<=}@*) (*@\HLJLs{1e-6"{}}@*) (*@\HLJLnf{sum}@*)(*@\HLJLp{(}@*)(*@\HLJLn{abs}@*)(*@\HLJLoB{.}@*)(*@\HLJLp{(}@*)(*@\HLJLn{coef{\_}l1}@*)(*@\HLJLp{)}@*) (*@\HLJLoB{.<=}@*) (*@\HLJLnfB{1e-6}@*)(*@\HLJLp{)}@*)
+\end{lstlisting}
+
+\begin{lstlisting}
+there are 960 components of w which absolute value <= 1e-6
+\end{lstlisting}
+
+
+\subsection{20. (a)}
+
+\begin{lstlisting}
+(*@\HLJLn{model{\_}l2}@*) (*@\HLJLoB{=}@*) (*@\HLJLn{models{\_}l2}@*)(*@\HLJLp{[}@*)(*@\HLJLn{idx{\_}l2}@*)(*@\HLJLp{]}@*)
+(*@\HLJLn{coef{\_}l2}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{get{\_}coefficient}@*)(*@\HLJLp{(}@*)(*@\HLJLn{model{\_}l2}@*)(*@\HLJLp{)}@*)
+
+(*@\HLJLnd{@printf}@*) (*@\HLJLs{"{}there}@*) (*@\HLJLs{are}@*) (*@\HLJLs{{\%}i}@*) (*@\HLJLs{components}@*) (*@\HLJLs{of}@*) (*@\HLJLs{w}@*) (*@\HLJLs{which}@*) (*@\HLJLs{absolute}@*) (*@\HLJLs{value}@*) (*@\HLJLs{<=}@*) (*@\HLJLs{1e-6"{}}@*) (*@\HLJLnf{sum}@*)(*@\HLJLp{(}@*)(*@\HLJLn{abs}@*)(*@\HLJLoB{.}@*)(*@\HLJLp{(}@*)(*@\HLJLn{coef{\_}l2}@*)(*@\HLJLp{)}@*) (*@\HLJLoB{.<=}@*) (*@\HLJLnfB{1e-6}@*)(*@\HLJLp{)}@*)
+\end{lstlisting}
+
+\begin{lstlisting}
+there are 1 components of w which absolute value <= 1e-6
+\end{lstlisting}
+
+
+$\pagebreak$
+
+\section{Code Reference}
+
+\begin{lstlisting}
+(*@\HLJLk{using}@*) (*@\HLJLn{Printf}@*)
+(*@\HLJLk{import}@*) (*@\HLJLn{DelimitedFiles}@*)(*@\HLJLoB{:}@*) (*@\HLJLn{readdlm}@*)
+(*@\HLJLk{import}@*) (*@\HLJLn{PyCall}@*)(*@\HLJLoB{:}@*) (*@\HLJLn{pyimport}@*)
+(*@\HLJLk{import}@*) (*@\HLJLn{InvertedIndices}@*)(*@\HLJLoB{:}@*) (*@\HLJLn{Not}@*)
+(*@\HLJLk{import}@*) (*@\HLJLn{Combinatorics}@*)(*@\HLJLoB{:}@*) (*@\HLJLn{with{\_}replacement{\_}combinations}@*)
+(*@\HLJLk{using}@*) (*@\HLJLn{Distributions}@*)(*@\HLJLp{,}@*) (*@\HLJLn{Random}@*)
+
+
+(*@\HLJLk{function}@*) (*@\HLJLnf{read{\_}data}@*)(*@\HLJLp{(}@*)(*@\HLJLn{path}@*)(*@\HLJLp{)}@*)
+    (*@\HLJLn{data}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{readdlm}@*)(*@\HLJLp{(}@*)(*@\HLJLn{path}@*)(*@\HLJLp{,}@*) (*@\HLJLsc{{\textquotesingle}{\textbackslash}t{\textquotesingle}}@*)(*@\HLJLp{,}@*) (*@\HLJLn{Float64}@*)(*@\HLJLp{,}@*) (*@\HLJLsc{{\textquotesingle}{\textbackslash}n{\textquotesingle}}@*)(*@\HLJLp{)}@*)
+    (*@\HLJLn{features}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{hcat}@*)(*@\HLJLp{(}@*)(*@\HLJLnf{ones}@*)(*@\HLJLp{(}@*)(*@\HLJLnf{size}@*)(*@\HLJLp{(}@*)(*@\HLJLn{data}@*)(*@\HLJLp{,}@*) (*@\HLJLni{1}@*)(*@\HLJLp{)),}@*) (*@\HLJLn{data}@*)(*@\HLJLp{[}@*)(*@\HLJLoB{:}@*)(*@\HLJLp{,}@*) (*@\HLJLk{begin}@*)(*@\HLJLoB{:}@*)(*@\HLJLk{end}@*)(*@\HLJLoB{-}@*)(*@\HLJLni{1}@*)(*@\HLJLp{])}@*) 
+    (*@\HLJLn{label}@*) (*@\HLJLoB{=}@*) (*@\HLJLn{data}@*)(*@\HLJLp{[}@*)(*@\HLJLoB{:}@*)(*@\HLJLp{,}@*) (*@\HLJLk{end}@*)(*@\HLJLp{]}@*)
+    
+    (*@\HLJLk{return}@*) (*@\HLJLn{features}@*)(*@\HLJLp{,}@*) (*@\HLJLn{label}@*)
+(*@\HLJLk{end}@*)
+
+
+(*@\HLJLnf{l2{\_}param{\_}transform}@*)(*@\HLJLp{(}@*)(*@\HLJLn{x}@*)(*@\HLJLp{)}@*) (*@\HLJLoB{=}@*) (*@\HLJLni{1}@*) (*@\HLJLoB{/}@*) (*@\HLJLp{(}@*)(*@\HLJLni{2}@*)(*@\HLJLn{x}@*)(*@\HLJLp{)}@*)
+(*@\HLJLnf{l1{\_}param{\_}transform}@*)(*@\HLJLp{(}@*)(*@\HLJLn{x}@*)(*@\HLJLp{)}@*) (*@\HLJLoB{=}@*) (*@\HLJLni{1}@*) (*@\HLJLoB{/}@*) (*@\HLJLp{(}@*)(*@\HLJLn{x}@*)(*@\HLJLp{)}@*)
+
+
+(*@\HLJLnf{transform}@*)(*@\HLJLp{(}@*)(*@\HLJLn{idx}@*)(*@\HLJLp{;}@*) (*@\HLJLn{mat}@*)(*@\HLJLp{)}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{broadcast}@*)(*@\HLJLp{(}@*)(*@\HLJLoB{*}@*)(*@\HLJLp{,}@*) (*@\HLJLnf{eachcol}@*)(*@\HLJLp{(}@*)(*@\HLJLn{mat}@*)(*@\HLJLp{[}@*)(*@\HLJLoB{:}@*)(*@\HLJLp{,}@*) (*@\HLJLn{idx}@*)(*@\HLJLp{])}@*)(*@\HLJLoB{...}@*)(*@\HLJLp{)}@*)
+(*@\HLJLk{function}@*) (*@\HLJLnf{polynomial{\_}transform}@*)(*@\HLJLp{(}@*)(*@\HLJLn{X}@*)(*@\HLJLp{;}@*) (*@\HLJLn{Q}@*)(*@\HLJLp{)}@*)
+    (*@\HLJLn{d}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{size}@*)(*@\HLJLp{(}@*)(*@\HLJLn{X}@*)(*@\HLJLp{,}@*) (*@\HLJLni{2}@*)(*@\HLJLp{)}@*) (*@\HLJLoB{-}@*) (*@\HLJLni{1}@*)
+    (*@\HLJLn{X{\_}}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{Matrix}@*)(*@\HLJLp{{\{}}@*)(*@\HLJLn{Float64}@*)(*@\HLJLp{{\}}(}@*)(*@\HLJLn{undef}@*)(*@\HLJLp{,}@*) (*@\HLJLnf{size}@*)(*@\HLJLp{(}@*)(*@\HLJLn{X}@*)(*@\HLJLp{,}@*) (*@\HLJLni{1}@*)(*@\HLJLp{),}@*) (*@\HLJLnf{binomial}@*)(*@\HLJLp{(}@*)(*@\HLJLn{Q}@*)(*@\HLJLoB{+}@*)(*@\HLJLn{d}@*)(*@\HLJLp{,}@*) (*@\HLJLn{d}@*)(*@\HLJLp{))}@*)
+    (*@\HLJLn{X{\_}}@*)(*@\HLJLp{[}@*)(*@\HLJLoB{:}@*)(*@\HLJLp{,}@*) (*@\HLJLni{1}@*)(*@\HLJLoB{:}@*)(*@\HLJLn{d}@*)(*@\HLJLoB{+}@*)(*@\HLJLni{1}@*)(*@\HLJLp{]}@*) (*@\HLJLoB{=}@*) (*@\HLJLn{X}@*)(*@\HLJLp{;}@*) (*@\HLJLn{X}@*) (*@\HLJLoB{=}@*) (*@\HLJLn{X}@*)(*@\HLJLp{[}@*)(*@\HLJLoB{:}@*)(*@\HLJLp{,}@*) (*@\HLJLk{begin}@*)(*@\HLJLoB{+}@*)(*@\HLJLni{1}@*)(*@\HLJLoB{:}@*)(*@\HLJLk{end}@*)(*@\HLJLp{]}@*)
+
+    (*@\HLJLn{start}@*) (*@\HLJLoB{=}@*) (*@\HLJLn{d}@*) (*@\HLJLoB{+}@*) (*@\HLJLni{2}@*)
+    (*@\HLJLk{for}@*) (*@\HLJLn{q}@*) (*@\HLJLoB{=}@*) (*@\HLJLni{2}@*)(*@\HLJLoB{:}@*)(*@\HLJLn{Q}@*)
+        (*@\HLJLn{idx}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{collect}@*)(*@\HLJLp{(}@*)(*@\HLJLnf{with{\_}replacement{\_}combinations}@*)(*@\HLJLp{(}@*)(*@\HLJLni{1}@*)(*@\HLJLoB{:}@*)(*@\HLJLn{d}@*)(*@\HLJLp{,}@*) (*@\HLJLn{q}@*)(*@\HLJLp{))}@*)
+        (*@\HLJLn{terminate}@*) (*@\HLJLoB{=}@*) (*@\HLJLn{start}@*) (*@\HLJLoB{+}@*) (*@\HLJLnf{length}@*)(*@\HLJLp{(}@*)(*@\HLJLn{idx}@*)(*@\HLJLp{)}@*) (*@\HLJLoB{-}@*) (*@\HLJLni{1}@*)
+        (*@\HLJLn{X{\_}}@*)(*@\HLJLp{[}@*)(*@\HLJLoB{:}@*)(*@\HLJLp{,}@*) (*@\HLJLn{start}@*)(*@\HLJLoB{:}@*)(*@\HLJLn{terminate}@*)(*@\HLJLp{]}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{reduce}@*)(*@\HLJLp{(}@*)(*@\HLJLn{hcat}@*)(*@\HLJLp{,}@*) (*@\HLJLn{transform}@*)(*@\HLJLoB{.}@*)(*@\HLJLp{(}@*)(*@\HLJLn{idx}@*)(*@\HLJLp{;}@*) (*@\HLJLn{mat}@*)(*@\HLJLoB{=}@*)(*@\HLJLn{X}@*)(*@\HLJLp{))}@*)
+        (*@\HLJLn{start}@*) (*@\HLJLoB{=}@*) (*@\HLJLn{terminate}@*) (*@\HLJLoB{+}@*) (*@\HLJLni{1}@*)
+    (*@\HLJLk{end}@*)
+    (*@\HLJLk{return}@*) (*@\HLJLn{X{\_}}@*)
+(*@\HLJLk{end}@*)
+
+
+(*@\HLJLkd{const}@*) (*@\HLJLn{liblinear}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{pyimport}@*)(*@\HLJLp{(}@*)(*@\HLJLs{"{}liblinear.liblinearutil"{}}@*)(*@\HLJLp{)}@*)
+
+(*@\HLJLk{function}@*) (*@\HLJLnf{train}@*)(*@\HLJLp{(}@*)(*@\HLJLn{c}@*)(*@\HLJLp{;}@*) (*@\HLJLn{y}@*)(*@\HLJLp{,}@*) (*@\HLJLn{x}@*)(*@\HLJLp{,}@*) (*@\HLJLn{s}@*)(*@\HLJLoB{=}@*)(*@\HLJLni{0}@*)(*@\HLJLp{)}@*)
+    (*@\HLJLn{param}@*) (*@\HLJLoB{=}@*) (*@\HLJLn{liblinear}@*)(*@\HLJLoB{.}@*)(*@\HLJLnf{parameter}@*)(*@\HLJLp{(}@*)(*@\HLJLs{"{}-s}@*) (*@\HLJLsi{{\$}s}@*) (*@\HLJLs{-c}@*) (*@\HLJLsi{{\$}c}@*) (*@\HLJLs{-e}@*) (*@\HLJLs{0.000001}@*) (*@\HLJLs{-q"{}}@*)(*@\HLJLp{)}@*)
+    (*@\HLJLn{prob}@*) (*@\HLJLoB{=}@*) (*@\HLJLn{liblinear}@*)(*@\HLJLoB{.}@*)(*@\HLJLnf{problem}@*)(*@\HLJLp{(}@*)(*@\HLJLn{y}@*)(*@\HLJLp{,}@*) (*@\HLJLn{x}@*)(*@\HLJLp{)}@*)
+    (*@\HLJLn{model}@*) (*@\HLJLoB{=}@*) (*@\HLJLn{liblinear}@*)(*@\HLJLoB{.}@*)(*@\HLJLnf{train}@*)(*@\HLJLp{(}@*)(*@\HLJLn{prob}@*)(*@\HLJLp{,}@*) (*@\HLJLn{param}@*)(*@\HLJLp{)}@*)
+
+    (*@\HLJLk{return}@*) (*@\HLJLn{model}@*)
+(*@\HLJLk{end}@*)
+
+
+(*@\HLJLk{function}@*) (*@\HLJLnf{binary{\_}error}@*)(*@\HLJLp{(}@*)(*@\HLJLn{model}@*)(*@\HLJLp{;}@*) (*@\HLJLn{y}@*)(*@\HLJLp{,}@*) (*@\HLJLn{x}@*)(*@\HLJLp{)}@*)
+    (*@\HLJLn{{\_}}@*)(*@\HLJLp{,}@*) (*@\HLJLn{p{\_}acc}@*)(*@\HLJLp{,}@*) (*@\HLJLn{{\_}}@*) (*@\HLJLoB{=}@*) (*@\HLJLn{liblinear}@*)(*@\HLJLoB{.}@*)(*@\HLJLnf{predict}@*)(*@\HLJLp{(}@*)(*@\HLJLn{y}@*)(*@\HLJLp{,}@*) (*@\HLJLn{x}@*)(*@\HLJLp{,}@*) (*@\HLJLn{model}@*)(*@\HLJLp{,}@*) (*@\HLJLs{"{}-q"{}}@*)(*@\HLJLp{)}@*)
+    (*@\HLJLn{err}@*) (*@\HLJLoB{=}@*) (*@\HLJLni{1}@*) (*@\HLJLoB{-}@*) (*@\HLJLp{(}@*)(*@\HLJLn{p{\_}acc}@*)(*@\HLJLp{[}@*)(*@\HLJLni{1}@*)(*@\HLJLp{]}@*)(*@\HLJLoB{/}@*)(*@\HLJLni{100}@*)(*@\HLJLp{)}@*)
+
+    (*@\HLJLk{return}@*) (*@\HLJLn{err}@*)
+(*@\HLJLk{end}@*)
+
+
+(*@\HLJLk{struct}@*) (*@\HLJLnf{ValResult}@*)(*@\HLJLp{{\{}}@*)(*@\HLJLn{T}@*)(*@\HLJLp{{\}}}@*)
+    (*@\HLJLn{idx}@*)(*@\HLJLoB{::}@*)(*@\HLJLn{Int64}@*)
+    (*@\HLJLn{errs}@*)(*@\HLJLoB{::}@*)(*@\HLJLnf{Vector}@*)(*@\HLJLp{{\{}}@*)(*@\HLJLn{Float64}@*)(*@\HLJLp{{\}}}@*)
+    (*@\HLJLn{models}@*)(*@\HLJLoB{::}@*)(*@\HLJLn{T}@*)
+(*@\HLJLk{end}@*)
+(*@\HLJLnf{mini{\_}error}@*)(*@\HLJLp{(}@*)(*@\HLJLn{a}@*)(*@\HLJLoB{::}@*)(*@\HLJLn{ValResult}@*)(*@\HLJLp{)}@*) (*@\HLJLoB{=}@*) (*@\HLJLn{a}@*)(*@\HLJLoB{.}@*)(*@\HLJLn{errs}@*)(*@\HLJLp{[}@*)(*@\HLJLn{a}@*)(*@\HLJLoB{.}@*)(*@\HLJLn{idx}@*)(*@\HLJLp{]}@*)
+(*@\HLJLnf{best{\_}model}@*)(*@\HLJLp{(}@*)(*@\HLJLn{a}@*)(*@\HLJLoB{::}@*)(*@\HLJLn{ValResult}@*)(*@\HLJLp{)}@*) (*@\HLJLoB{=}@*) (*@\HLJLn{a}@*)(*@\HLJLoB{.}@*)(*@\HLJLn{models}@*)(*@\HLJLp{[}@*)(*@\HLJLn{a}@*)(*@\HLJLoB{.}@*)(*@\HLJLn{idx}@*)(*@\HLJLp{]}@*)
+
+
+(*@\HLJLk{function}@*) (*@\HLJLnf{pick{\_}param}@*)(*@\HLJLp{(}@*)(*@\HLJLn{param}@*)(*@\HLJLp{,}@*) (*@\HLJLn{train{\_}y}@*)(*@\HLJLp{,}@*) (*@\HLJLn{train{\_}x}@*)(*@\HLJLp{,}@*) (*@\HLJLn{eval{\_}y}@*)(*@\HLJLp{,}@*) (*@\HLJLn{eval{\_}x}@*)(*@\HLJLp{)}@*)
+    (*@\HLJLn{models}@*) (*@\HLJLoB{=}@*) (*@\HLJLn{train}@*)(*@\HLJLoB{.}@*)(*@\HLJLp{(}@*)(*@\HLJLn{param}@*)(*@\HLJLp{;}@*) (*@\HLJLn{y}@*)(*@\HLJLoB{=}@*)(*@\HLJLn{train{\_}y}@*)(*@\HLJLp{,}@*) (*@\HLJLn{x}@*)(*@\HLJLoB{=}@*)(*@\HLJLn{train{\_}x}@*)(*@\HLJLp{)}@*)
+    (*@\HLJLn{err}@*)  (*@\HLJLoB{=}@*) (*@\HLJLn{binary{\_}error}@*)(*@\HLJLoB{.}@*)(*@\HLJLp{(}@*)(*@\HLJLn{models}@*)(*@\HLJLp{;}@*) (*@\HLJLn{y}@*)(*@\HLJLoB{=}@*)(*@\HLJLn{eval{\_}y}@*)(*@\HLJLp{,}@*) (*@\HLJLn{x}@*)(*@\HLJLoB{=}@*)(*@\HLJLn{eval{\_}x}@*)(*@\HLJLp{)}@*)
+    (*@\HLJLn{idx}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{argmin}@*)(*@\HLJLp{(}@*)(*@\HLJLn{err}@*)(*@\HLJLp{)}@*)
+    (*@\HLJLnd{@inbounds}@*) (*@\HLJLn{model}@*) (*@\HLJLoB{=}@*) (*@\HLJLn{models}@*)(*@\HLJLp{[}@*)(*@\HLJLn{idx}@*)(*@\HLJLp{]}@*)
+
+    (*@\HLJLk{return}@*) (*@\HLJLnf{ValResult}@*)(*@\HLJLp{(}@*)(*@\HLJLn{idx}@*)(*@\HLJLp{,}@*) (*@\HLJLn{err}@*)(*@\HLJLp{,}@*) (*@\HLJLn{models}@*)(*@\HLJLp{)}@*)
+(*@\HLJLk{end}@*)
+
+
+(*@\HLJLk{function}@*) (*@\HLJLnf{pick{\_}param{\_}val}@*)(*@\HLJLp{(}@*)(*@\HLJLn{y}@*)(*@\HLJLp{,}@*) (*@\HLJLn{x}@*)(*@\HLJLp{;}@*) (*@\HLJLn{param}@*)(*@\HLJLp{)}@*)
+    (*@\HLJLn{N}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{size}@*)(*@\HLJLp{(}@*)(*@\HLJLn{x}@*)(*@\HLJLp{,}@*) (*@\HLJLni{1}@*)(*@\HLJLp{)}@*)
+    (*@\HLJLn{pos}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{sample}@*)(*@\HLJLp{(}@*)(*@\HLJLni{1}@*)(*@\HLJLoB{:}@*)(*@\HLJLn{N}@*)(*@\HLJLp{,}@*) (*@\HLJLni{80}@*)(*@\HLJLp{,}@*) (*@\HLJLn{replace}@*)(*@\HLJLoB{=}@*)(*@\HLJLkc{false}@*)(*@\HLJLp{)}@*)
+    (*@\HLJLnd{@inbounds}@*) (*@\HLJLn{train{\_}x}@*)(*@\HLJLp{,}@*) (*@\HLJLn{eval{\_}x}@*) (*@\HLJLoB{=}@*) (*@\HLJLn{x}@*)(*@\HLJLp{[}@*)(*@\HLJLnf{Not}@*)(*@\HLJLp{(}@*)(*@\HLJLn{pos}@*)(*@\HLJLp{),}@*) (*@\HLJLoB{:}@*)(*@\HLJLp{],}@*) (*@\HLJLn{x}@*)(*@\HLJLp{[}@*)(*@\HLJLn{pos}@*)(*@\HLJLp{,}@*) (*@\HLJLoB{:}@*)(*@\HLJLp{]}@*)
+    (*@\HLJLnd{@inbounds}@*) (*@\HLJLn{train{\_}y}@*)(*@\HLJLp{,}@*) (*@\HLJLn{eval{\_}y}@*) (*@\HLJLoB{=}@*) (*@\HLJLn{y}@*)(*@\HLJLp{[}@*)(*@\HLJLnf{Not}@*)(*@\HLJLp{(}@*)(*@\HLJLn{pos}@*)(*@\HLJLp{)],}@*) (*@\HLJLn{y}@*)(*@\HLJLp{[}@*)(*@\HLJLn{pos}@*)(*@\HLJLp{]}@*)
+    (*@\HLJLn{res}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{pick{\_}param}@*)(*@\HLJLp{(}@*)(*@\HLJLn{param}@*)(*@\HLJLp{,}@*) (*@\HLJLn{train{\_}y}@*)(*@\HLJLp{,}@*) (*@\HLJLn{train{\_}x}@*)(*@\HLJLp{,}@*) (*@\HLJLn{eval{\_}y}@*)(*@\HLJLp{,}@*) (*@\HLJLn{eval{\_}x}@*)(*@\HLJLp{)}@*)
+
+    (*@\HLJLk{return}@*) (*@\HLJLn{res}@*)
+(*@\HLJLk{end}@*)
+
+
+(*@\HLJLk{function}@*) (*@\HLJLnf{pick{\_}param{\_}crossval}@*)(*@\HLJLp{(}@*)(*@\HLJLn{y}@*)(*@\HLJLp{,}@*) (*@\HLJLn{x}@*)(*@\HLJLp{;}@*) (*@\HLJLn{param}@*)(*@\HLJLp{,}@*) (*@\HLJLn{K}@*)(*@\HLJLp{)}@*)
+    (*@\HLJLn{N}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{size}@*)(*@\HLJLp{(}@*)(*@\HLJLn{x}@*)(*@\HLJLp{,}@*) (*@\HLJLni{1}@*)(*@\HLJLp{);}@*) (*@\HLJLn{r}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{Int64}@*)(*@\HLJLp{(}@*)(*@\HLJLn{N}@*)(*@\HLJLoB{/}@*)(*@\HLJLn{K}@*)(*@\HLJLp{)}@*)
+    (*@\HLJLn{idx}@*)(*@\HLJLp{,}@*) (*@\HLJLn{start}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{repeat}@*)(*@\HLJLp{(}@*)(*@\HLJLni{1}@*)(*@\HLJLoB{:}@*)(*@\HLJLn{N}@*)(*@\HLJLp{,}@*) (*@\HLJLn{outer}@*)(*@\HLJLoB{=}@*)(*@\HLJLni{2}@*)(*@\HLJLp{),}@*) (*@\HLJLnf{rand}@*)(*@\HLJLp{(}@*)(*@\HLJLni{1}@*)(*@\HLJLoB{:}@*)(*@\HLJLn{N}@*)(*@\HLJLp{)}@*)
+    (*@\HLJLn{err}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{Matrix}@*)(*@\HLJLp{{\{}}@*)(*@\HLJLn{Float64}@*)(*@\HLJLp{{\}}(}@*)(*@\HLJLn{undef}@*)(*@\HLJLp{,}@*) (*@\HLJLnf{length}@*)(*@\HLJLp{(}@*)(*@\HLJLn{param}@*)(*@\HLJLp{),}@*) (*@\HLJLn{K}@*)(*@\HLJLp{)}@*)
+
+    (*@\HLJLnd{@inbounds}@*) (*@\HLJLk{for}@*) (*@\HLJLn{j}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{axes}@*)(*@\HLJLp{(}@*)(*@\HLJLn{err}@*)(*@\HLJLp{,}@*) (*@\HLJLni{2}@*)(*@\HLJLp{)}@*)
+        (*@\HLJLn{terminate}@*) (*@\HLJLoB{=}@*) (*@\HLJLn{start}@*) (*@\HLJLoB{+}@*) (*@\HLJLn{r}@*) (*@\HLJLoB{-}@*)(*@\HLJLni{1}@*)
+        (*@\HLJLn{pos}@*) (*@\HLJLoB{=}@*) (*@\HLJLn{idx}@*)(*@\HLJLp{[}@*)(*@\HLJLn{start}@*)(*@\HLJLoB{:}@*)(*@\HLJLn{terminate}@*)(*@\HLJLp{]}@*)
+        (*@\HLJLn{train{\_}x}@*)(*@\HLJLp{,}@*) (*@\HLJLn{eval{\_}x}@*) (*@\HLJLoB{=}@*) (*@\HLJLn{x}@*)(*@\HLJLp{[}@*)(*@\HLJLnf{Not}@*)(*@\HLJLp{(}@*)(*@\HLJLn{pos}@*)(*@\HLJLp{),}@*) (*@\HLJLoB{:}@*)(*@\HLJLp{],}@*) (*@\HLJLn{x}@*)(*@\HLJLp{[}@*)(*@\HLJLn{pos}@*)(*@\HLJLp{,}@*) (*@\HLJLoB{:}@*)(*@\HLJLp{]}@*)
+        (*@\HLJLn{train{\_}y}@*)(*@\HLJLp{,}@*) (*@\HLJLn{eval{\_}y}@*) (*@\HLJLoB{=}@*) (*@\HLJLn{y}@*)(*@\HLJLp{[}@*)(*@\HLJLnf{Not}@*)(*@\HLJLp{(}@*)(*@\HLJLn{pos}@*)(*@\HLJLp{)],}@*) (*@\HLJLn{y}@*)(*@\HLJLp{[}@*)(*@\HLJLn{pos}@*)(*@\HLJLp{]}@*)
+
+        (*@\HLJLn{err}@*)(*@\HLJLp{[}@*)(*@\HLJLoB{:}@*)(*@\HLJLp{,}@*) (*@\HLJLn{j}@*)(*@\HLJLp{]}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{pick{\_}param}@*)(*@\HLJLp{(}@*)(*@\HLJLn{param}@*)(*@\HLJLp{,}@*) (*@\HLJLn{train{\_}y}@*)(*@\HLJLp{,}@*) (*@\HLJLn{train{\_}x}@*)(*@\HLJLp{,}@*) (*@\HLJLn{eval{\_}y}@*)(*@\HLJLp{,}@*) (*@\HLJLn{eval{\_}x}@*)(*@\HLJLp{)}@*)(*@\HLJLoB{.}@*)(*@\HLJLn{errs}@*)
+        (*@\HLJLn{start}@*) (*@\HLJLoB{=}@*) (*@\HLJLn{terminate}@*) (*@\HLJLoB{+}@*) (*@\HLJLni{1}@*)
+    (*@\HLJLk{end}@*)
+    (*@\HLJLnd{@inbounds}@*) (*@\HLJLn{param{\_}ecv}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{mean}@*)(*@\HLJLp{(}@*)(*@\HLJLn{err}@*)(*@\HLJLp{,}@*) (*@\HLJLn{dims}@*)(*@\HLJLoB{=}@*)(*@\HLJLni{2}@*)(*@\HLJLp{)[}@*)(*@\HLJLoB{:}@*)(*@\HLJLp{,}@*) (*@\HLJLni{1}@*)(*@\HLJLp{]}@*)
+    (*@\HLJLn{idx}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{argmin}@*)(*@\HLJLp{(}@*)(*@\HLJLn{param{\_}ecv}@*)(*@\HLJLp{)}@*)
+
+    (*@\HLJLk{return}@*) (*@\HLJLn{idx}@*)(*@\HLJLp{,}@*) (*@\HLJLn{param{\_}ecv}@*)(*@\HLJLp{[}@*)(*@\HLJLn{idx}@*)(*@\HLJLp{]}@*)
+(*@\HLJLk{end}@*)
+
+
+(*@\HLJLk{function}@*) (*@\HLJLnf{get{\_}coefficient}@*)(*@\HLJLp{(}@*)(*@\HLJLn{model}@*)(*@\HLJLp{;}@*) (*@\HLJLn{Q}@*)(*@\HLJLoB{=}@*)(*@\HLJLni{4}@*)(*@\HLJLp{,}@*) (*@\HLJLn{d}@*)(*@\HLJLoB{=}@*)(*@\HLJLni{10}@*)(*@\HLJLp{)}@*)
+    (*@\HLJLn{k}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{binomial}@*)(*@\HLJLp{(}@*)(*@\HLJLn{Q}@*)(*@\HLJLoB{+}@*)(*@\HLJLn{d}@*)(*@\HLJLp{,}@*) (*@\HLJLn{d}@*)(*@\HLJLp{)}@*)
+    (*@\HLJLn{coef}@*) (*@\HLJLoB{=}@*) (*@\HLJLn{model}@*)(*@\HLJLoB{.}@*)(*@\HLJLn{get{\_}decfun{\_}coef}@*)(*@\HLJLoB{.}@*)(*@\HLJLp{(}@*)(*@\HLJLni{1}@*)(*@\HLJLoB{:}@*)(*@\HLJLn{k}@*)(*@\HLJLp{)}@*)
+
+    (*@\HLJLk{return}@*) (*@\HLJLn{coef}@*)
+(*@\HLJLk{end}@*)
+\end{lstlisting}
+
+
+\end{document}

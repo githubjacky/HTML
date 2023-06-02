@@ -1,0 +1,403 @@
+---
+title: HW1 for Machine Learning
+author: Hsiu Hsuan Yeh
+date: 30th March 2023
+
+weave_options:
+    doctype: md2pdf
+    pandoc_options: --pdf-engine=xelatex
+    template: md2pdf.tpl
+    # fig_ext : .png
+    # fig_path: figure
+---
+
+
+# Multiple Choice
+## (a)
+Since the machine learning is a kind of data-driven algorithm and both (b) and (c)
+don't need to collect the data. They are not suitable. In terms of (d), it's a bit 
+tricky in that we can't find the "actual" look of Zeus, so we can't collect the 
+data and do the machine learning. For (a) we can collect the data and let the 
+machine learn the relations between requests and responses, reacting through the 
+learned relations. 
+
+
+## (d)
+$$y_{n(t)}w_t^Tx_n \le 0$$
+$$y_{n(t)}w_{t+1}^Tx_n > 0$$
+
+let's denote the learning rate to be $\eta$
+
+$$
+y_{n(t)} w_{t+1}^T x_{n(t)} = 
+    y_{n(t)} (w_t + y_{n(t)} x_{n(t)} \eta)^T x_{n(t)} = 
+    y_{n(t)} w_t^T x_{n(t)} + y_{n(t)}^2 x_{n(t)}^T x_{n(t)} \eta > 0
+$$
+$$
+\Rightarrow 
+    \eta > \frac{-y_{n(t)} w_t^T x_{n(t)}}{y_{n(t)}^2 x_{n(t)}^T x_{n(t)}} = 
+    \frac{-y_{n(t)} w_t^T x_{n(t)}}{\lVert {x_{n(t)}} \rVert^2}
+$$
+$$
+\Rightarrow 
+    \eta = \left \lfloor 
+        {\frac{-y_{n(t)} w_t^T x_{n(t)}}{\lVert {x_{n(t)}} \rVert ^ 2} + 1} 
+    \right \rfloor
+$$
+
+
+## (c)
+$$
+w_{t+1} \leftarrow w_t + y_{n(t)} z_{n(t)},
+z_{n(t)} = \frac{x_{n(t)}}{\lVert {x_{n(t)}} \rVert}
+$$
+
+$$
+w_f' = \frac{w_f}{\lVert w_f \rVert}, 
+\lVert w_f' \rVert = 1
+$$
+
+$$
+\rho_z = 
+    \min_{n} \frac{y_nw_f^Tz_n}{\lVert w_f \rVert} = 
+    \min_{n} y_nw_f'^Tz_n
+$$
+
+$$
+w_f'^Tw_{t+1} \ge 
+    w_f'^Tw_t + \rho_z, 
+\Rightarrow w_f'^Tw_T \ge w_f'^Tw_0 + T\rho_z
+$$
+
+$$
+\lVert w_{t+1}^2 \rVert \le 
+    \lVert w_t \rVert^2 + \lVert z_n \rVert^2 = 
+    \lVert w_t \rVert^2 + 1, 
+\Rightarrow \lVert w_T \rVert^2 \le \lVert w_0 \rVert^2 + T
+$$
+
+$$
+\frac{w_f'^Tw_0 + T\rho_z}{\lVert w_f' \rVert \sqrt{\lVert w_0 \rVert^2 + T}} \le 
+    \frac{w_f'^Tw_T}{\lVert w_f' \rVert \lVert w_T \rVert} = 
+    cos\theta \le 1
+$$
+
+assume $w_0=0$
+$$
+\sqrt{T}\rho_z \le 1, 
+\Rightarrow T \le \frac{1}{\rho_z^2}
+$$
+
+
+## (b)
+$$
+U = 
+    \frac{1}{\rho_z^2} = 
+    \frac{1}{(\min_{n} y_n w_f'^T z_n)^2} = 
+    \frac{1}{(\min_{n} y_n w_f'^T \frac{x_n}{\Vert {x_n} \rVert})^2}
+$$
+
+$$
+U_{orig} = 
+    \frac{\max_{n} \lVert {x_n} \rVert^2}{(\min_{n} y_nw_f'^T x_n)^2}
+$$
+
+because $U_{orig}$ maximize the numerator and minimize the denominator simultaneously, 
+$$
+\Rightarrow U \le U_{orig}
+$$
+
+
+## (c)
+* PLA:
+$w_1=0+[-1, 2, -2] = [-1, 2, -2]$
+$w_2=[-1, 2, -2]+[1, 1, 1] = [0, 3, -1]$
+
+wrongly predicted: $(x, y) = ([1, \frac{1}{2}, 2], 1), ([1, \frac{1}{4}, 1], 1)$
+  
+* PAM
+$w_1=0+[-1, 2, -2] = [-1, 2, -2]$
+$w_2=[-1, 2, -2]+[1, 2, 0] = [0, 4, -2]$
+$w_3=[0, 4, -2]+[-1, 1, 0] = [-1, 5, -2]$
+$w_3=[-1, 5, -2]+[1, 1, 1] = [0, 6, -1]$
+
+all the test samples are correctly predicted
+
+The number of test samples are wrongly predicted by PLA but correctly predicted 
+by PAM is 2
+
+``\pagebreak``
+
+## (a)
+The ratings of movies is the label and the label is given so it's surpervised 
+learning. Moreover, ratings are within [1, 5] which is continuous so it's a 
+regression task.
+
+
+## (d)
+Human labeler'goal is to compare and decide which one is better. The main purpose
+of this step is to train the model to have general understanding of the text. Further
+tuning will be conduct in the down-stream task. Best assoicated learning problem
+is the self-surperivsed learning.
+
+
+## (c)
+In this case, there are two kinds of label +1, -1. If we plot the data, we can 
+observe that it's linare separable. Therefore, the minimum out sample error is 0.
+However, if all the data's label in the training set are same kind either +1, -1,
+there might be the case that the out sample error is 1 in that the algorithm 
+fail to identity.
+
+
+## (d)
+The distribution of data is unifomly within [+1, -1]*[+1, -1]. The sample space 
+is a square with side length 2. Therefore, each data point's probability ensity is $\frac{1}{4}$
+
+On one hand, the out sample error for hopothesis $h_1$ occurs when the samples 
+lie in the area within the unit circle but outside the circel with radius 0.5.
+$$
+E_{out}(h_1) = \frac{\pi 1^2 - \pi 0.25^2}{2*2} = \frac{3 \pi}{16}
+$$
+
+On the other hand, the out sample error for hopothesis $h_2$ occurs when the samples
+lie in the area within the circlue with radius 0.5 but outside the rhombus with
+side length $\sqrt{0.5}$
+$$
+E_{out}(h_2) = \frac{\pi 0.25 ^2 - 4 * \frac{1}{2}*0.5*0.5}{2*2} = \frac{\pi - 2}{16}
+$$
+
+
+## (b)
+Following the previous problem, samples that make the in sample error equal to 0
+for both hypothesis lie in the area within the rhombus or between the unit circle
+and the square. Since we sample 4 times the probabiltiy should be the probability 
+of one sample to the power of 4.
+$$
+(\frac{(4*\frac{1}{2}*0.5*0.5)+(4-\pi1^2)}{4})^4 = (\frac{\frac{9}{2}-\pi}{4})^4 \approx 0.0133
+$$
+
+``\pagebreak``
+
+## (d)
+First denote the random variable $X_i = \mathbbm{1}$(the darts in the circle)
+
+$$
+\Prob(X_i = 1) = \frac{\pi}{4},
+\E(\frac{\Sigma_{i=1}^n X_i}{N}) = \frac{\pi}{4}
+$$
+
+$$
+\Prob(|\frac{\Sigma_{i=1}^n X_i}{N} - \frac{\pi}{4}| \le \frac{10^{-2}}{4}) > 0.99
+$$
+
+$$
+\Prob(|\frac{\Sigma_{i=1}^n X_i}{N} - \frac{\pi}{4}| < \frac{10^{-2}}{4}) \le 0.99
+$$
+
+$$
+2\exp{(-2(\frac{10^{-2}}{4})^2N)} = 0.01, 
+\Rightarrow
+    N = \frac{-8}{10^{-4}}\log{\frac{0.01}{2}} \approx 423866
+$$
+
+
+## (d)
+$$
+\Prob(b_m \text{ is } \epsilon \text{-optimal}) = \Prob(
+    (|\frac{c_1}{N} - p_1| \le \frac{\epsilon}{2}) \cap
+     (|\frac{c_2}{N} - p_2| \le \frac{\epsilon}{2}) \cap ... \cap
+      (|\frac{c_M}{N} - p_M| \le \frac{\epsilon}{2})
+)
+$$
+
+$$
+ = 1 - \Prob(
+    (|\frac{c_1}{N} - p_1| > \frac{\epsilon}{2}) \cup
+    (|\frac{c_2}{N} - p_2| > \frac{\epsilon}{2}) \cup ... \cup
+    (|\frac{c_M}{N} - p_M| > \frac{\epsilon}{2})
+)
+$$
+
+$$
+> 1 - 2M\exp{\frac{-\epsilon^2 N}{2}}
+$$
+
+$$
+\Rightarrow 
+    \delta = 2M\exp{\frac{-\epsilon^2 N}{2}}, 
+N = \frac{2}{\epsilon^2}\ln{\frac{2M}{\delta}}
+$$
+
+``\pagebreak``
+
+# Coding
+```julia; echo=false, results="hidden"
+import DelimitedFiles: readdlm
+import Random: seed!
+import Distributions: sample
+import Statistics: median, mean
+import LinearAlgebra: normalize
+
+normalize_row(a) = vcat([transpose(normalize(i, 2)) for i=eachrow(a)]...)
+
+function read_data(path="../hw1_train.txt"; x₀=1, scale=1., normalize=false)
+    data = readdlm(path, '\t', Float64, '\n')
+    features = hcat(x₀*ones(size(data, 1)), data[:, begin:end-1]) ./ scale
+    normalize && (features = normalize_row(features))
+    label = data[:, end]
+    
+    return features, label, size(features, 1)
+end
+
+check_sign(a) = a == 0. ? (return 1.) : (return sign(a))
+
+finderror(s::Symbol, args...) = finderror(Val{s}(), args...)
+finderror(::Val{:single}, features, w, label) = findfirst(
+    x->x!=0., 
+    check_sign.(features*w) .- label
+)
+finderror(::Val{:multiple}, features, w, label) = findall(
+    x->x!=0., 
+    check_sign.(features*w) .- label
+)
+
+function PLA(features, label; M, seed=20230525)
+    seed!(seed)
+    obs, w, iter, m, M = 1:size(features, 1), 
+                         zeros(size(features, 2)), 
+                         0, 
+                         0,
+                         ceil(Int, M)
+    while !isnothing(m)
+        idx = rand(finderror(:multiple, features, w, label))
+        w += label[idx]*features[idx, :]
+        iter += 1
+
+        idxes = sample(obs, M; replace=true)
+        m = finderror(:single, features[idxes, :], w, label[idxes])
+    end
+    error = length(finderror(:multiple, features, w, label)) / length(obs)
+
+    return w, iter, error
+end
+```
+
+
+## (b)
+```julia
+features, label, N = read_data()
+avg_error = mean([PLA(features, label, M=N/2, seed=i)[3] for i =1:1000])
+print("average of the in sample error: $avg_error")
+```
+
+
+## (a)
+```julia
+avg_error = mean([PLA(features, label, M=4N, seed=i)[3] for i =1:1000])
+print("average of the in sample error: $avg_error")
+```
+
+
+## (d)
+```julia
+med_iter = median([PLA(features, label, M=4N, seed=i)[2] for i =1:1000])
+print("median of the iterations: $med_iter")
+```
+
+
+## (e)
+```julia
+med_w₀ = median([PLA(features, label, M=4N, seed=i)[1][1] for i =1:1000])
+print("median of the w₀: $med_w₀")
+```
+
+
+## (d)
+```julia
+features, label, N = read_data(scale=2)
+med_iter = median([PLA(features, label, M=4N, seed=i)[2] for i =1:1000])
+print("median of the iterations: $med_iter")
+```
+
+
+## (d)
+```julia
+x₀ = 0
+features, label, N = read_data(x₀=x₀)
+med_iter = median([PLA(features, label, M=4N, seed=i)[2] for i =1:1000])
+print("median of the iterations: $med_iter")
+```
+
+
+## (e)
+```julia
+x₀ = -1
+features, label, N = read_data(x₀=x₀)
+med_w₀x₀ = median([x₀*(PLA(features, label, M=4N, seed=i)[1][1]) for i =1:1000])
+
+print("median of the w₀x₀: $(med_w₀x₀)")
+```
+
+
+## (c)
+```julia
+x₀ = 0.1126
+features, label, N = read_data(x₀=x₀)
+med_w₀x₀ = median([x₀*(PLA(features, label, M=4N, seed=i)[1][1]) for i =1:1000])
+
+print("median of the w₀x₀: $(med_w₀x₀)")
+```
+ 
+``\pagebreak``
+
+# Code Reference
+```julia; eval=false
+import DelimitedFiles: readdlm
+import Random: seed!
+import Distributions: sample
+import Statistics: median, mean
+import LinearAlgebra: normalize
+
+normalize_row(a) = vcat([transpose(normalize(i, 2)) for i=eachrow(a)]...)
+
+function read_data(path="../hw1_train.txt"; x₀=1, scale=1., normalize=false)
+    data = readdlm(path, '\t', Float64, '\n')
+    features = hcat(x₀*ones(size(data, 1)), data[:, begin:end-1]) ./ scale
+    normalize && (features = normalize_row(features))
+    label = data[:, end]
+    
+    return features, label, size(features, 1)
+end
+
+check_sign(a) = a == 0. ? (return 1.) : (return sign(a))
+
+finderror(s::Symbol, args...) = finderror(Val{s}(), args...)
+finderror(::Val{:single}, features, w, label) = findfirst(
+    x->x!=0., 
+    check_sign.(features*w) .- label
+)
+finderror(::Val{:multiple}, features, w, label) = findall(
+    x->x!=0., 
+    check_sign.(features*w) .- label
+)
+
+function PLA(features, label; M, seed=20230525)
+    seed!(seed)
+    obs, w, iter, m, M = 1:size(features, 1), 
+                         zeros(size(features, 2)), 
+                         0, 
+                         0,
+                         ceil(Int, M)
+    while !isnothing(m)
+        idx = rand(finderror(:multiple, features, w, label))
+        w += label[idx]*features[idx, :]
+        iter += 1
+
+        idxes = sample(obs, M; replace=true)
+        m = finderror(:single, features[idxes, :], w, label[idxes])
+    end
+    error = length(finderror(:multiple, features, w, label)) / length(obs)
+
+    return w, iter, error
+end
+```

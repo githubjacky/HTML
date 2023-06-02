@@ -1,0 +1,497 @@
+---
+title: HW5 for Machine Learning
+author: Hsiu Hsuan Yeh
+date: 1st June 2023
+
+weave_options:
+    doctype: md2pdf
+    pandoc_options: --pdf-engine=xelatex
+    template: md2pdf.tpl
+    # fig_ext : .png
+    # fig_path: figure
+---
+
+
+# Multiple Choice
+## 1. (d)
+ $\xi^{\ast}_n > 1$ means the sample is misclassified while $\xi^{\ast}_n = 0$ 
+means the sample is classified correctly. Hence the number of misclassified examples
+will less than $\Sigma_{n=1}^N  \xi^{\ast}_n$. Among all choices, only 
+$\Sigma_{n=1}^N \frac{\xi^{\ast}_n}{2}$ is not the upper bound since $1 < \xi^{\ast}_n < 2$
+will be underestimated.
+
+## 2. (c)
+Thrrough the inner-primal feasible condition, we have the equation: 
+$\alpha_n( 1-\xi_n-y_n(w^Tz_n+b) ) = 0$. Then considering the constraint: $\xi_n \ge 0$, and 
+for all bounded support vector, $\alpha_n = c$. 
+$$
+\Rightarrow 
+    1 - y_n(w^Tz+n+b) \ge 0
+$$
+$$
+\begin{cases}
+    y_n = 1, 1-w^Tz+n+b \ge 0, \Rightarrow b \le w^Tz_n+b \\ 
+    y_n = -1, 1+w^Tz+n+b \ge 0, \Rightarrow b \ge w^Tz_n+b
+\end{cases}
+$$
+$$
+\Rightarrow \min_n b_n = \min_{y_n=-1} (y_n-w^Tz_n) = \min_{n: y_n=-1} (-1-\Sigma_{m=1}^N y_m\alpha_m^\ast K(x_n, x_m))
+$$
+
+## 3. (a)
+$$
+L(w, b, \xi) = \frac{1}{2}w^Tw + C\Sigma_{n=1}^N \xi_n^2 + 
+\Sigma_{n=1}^N  \alpha_n(1-\xi_n-y_n(w^T\phi(x_n)+b))
+$$
+$$
+\frac{\partial}{\partial \xi_n} = 2C\xi_n - \alpha_n = 0, \Rightarrow \xi^{\ast}_n = \frac{1}{2C}\alpha^{\ast}_n
+$$
+
+## 4. (a)
+The maximum of $K_{ds}(x, x')$ is 2d(R-L). It occurs when x = x' which means for all
+s, d and $\theta$, g(x) == g(x'). Howerver, if g($x_i$)g($x_i'$) = -1, 2d(R-1) should be
+minused by ($\frac{||x_i - x_i'||_1}{2} * 2 = ||x_i - x_i||_1$). $\frac{||x_i - x_i'||_1}{2}$ and 2
+represent the number of $\theta$ and s which will let g($x_i$)g($x_i'$) = -1 respectively. 
+
+
+## 5. (a)
+let's assume the "true" function form is f(x)
+$$
+\begin{align}
+    E_{out}(G) &= \frac{1}{N} \Sigma_{i=1}^N [ G(x_i) \neq f(x_i) ] \\
+               &= \frac{1}{N} \Sigma_{i=1}^N [ sign(\Sigma_{t=1}^{2M+1} g_t(x_i)) \neq f(x_i) ] \\
+               &= \frac{1}{N} \Sigma_{i=1}^N [ sign(\Sigma_{t=1}^{2M+1} f(x_i)g_t(x_i)) \le 0 ] \\
+               &= \frac{1}{N} \Sigma_{i=1}^N [ sign( \frac{1}{k} \Sigma_{t=1}^{2M+1} f(x_i)g_t(x_i)) \le 0 ], \forall 0 < k \le 2M+1
+\end{align}
+$$
+let's denote $m_i^t = f(x_i)g_t(x_i), F(m) = [m < 0]$
+$$
+\Rightarrow E_{out}(G) = \frac{1}{N} \Sigma_{i=1}^N F( \frac{1}{k} \Sigma_{t=1}^{2M+1} m_i^t)
+$$
+$$
+\begin{cases}
+    |\{m_i^t: m_i^t=-1\}| > |\{m_i^t: m_i^t=1\}|, \Rightarrow  F( \frac{1}{k} \Sigma_{t=1}^{2M+1} m_i^t) = 1 \le \frac{1}{m+1} \Sigma_{t=1}^{2M+1} F(m_i^t) \\ 
+    |\{m_i^t: m_i^t=-1\}| < |\{m_i^t: m_i^t=1\}|, \Rightarrow  F( \frac{1}{k} \Sigma_{t=1}^{2M+1} m_i^t) = 0 \le \frac{1}{k} \Sigma_{t=1}^{2M+1} F(m_i^t), \forall 0 < k \le 2M+1
+\end{cases}
+$$
+$$
+\Rightarrow E_{out}(G) = \frac{1}{N} \Sigma_{i=1}^N F( \frac{1}{k} \Sigma_{t=1}^{2M+1} m_i^t) \le \frac{1}{m+1} \Sigma_{t=1}^{2M+1} \frac{1}{N} \Sigma_{i=1}^N  F(m_i^t) = \Sigma_{t=1}^{2M+1} \frac{1}{N} e_t
+$$
+
+## 6. (b)
+$$
+1 - \frac{C_{N'}^1127 * N'}{1127^{N'}} \ge 0.75, \Rightarrow when N=56, \frac{C_{N'}^1127 * N'}{1127^{N'}} \approx 0.24
+$$
+
+## 7. (c)
+$$
+\begin{cases}
+    w = \frac{ \Sigma_{i=1}^N u_ny_nx_n}{ \Sigma_{i=1}^N x_n^Tx_n} \\
+    \tilde(w) = \frac{ \Sigma_{i=1}^N \tilde{y_n}\tilde{x_n} }{ \Sigma_{i=1}^N \tilde{x_n}^T\tilde{x_n} } 
+\end{cases}
+$$
+$$
+\Rightarrow \tilde{x_n} = \sqrt{u_n}x_n, \tilde{y_n} = \sqrt{u_n}y_n
+$$
+
+## 8. (c)
+change of impurity(calculated by gini index)
+- (a): 0.375 -> 0, 0.5, increase by 0.25
+- (b): 0.3375 -> 0.32, 0.375, increase by 0.02
+- (c): 0.4662 -> 0.42, , 0, decrease by 0.5124
+- (d): 0.3848 -> 0.18, 0.18, decrease by 0.4096
+- (e): 0.2952 -> 0.32, 0.18, decrease by 0.0904
+
+## 9. (d)
+$$
+\epsilon_T = \frac{ \Sigma_{n=1}^N u_n^T[y_n \neq g(x_n)] }{ \Sigma_{n=1}^N  u_n^T }
+$$
+$$
+\begin{align}
+    \Sigma_{n=1}^N u_n^{T+1} &= \sqrt{\frac{1-\epsilon_T}{\epsilon_T}} \Sigma_{n=1}^N u_n^T[y_n \neq g(x_n)] + \sqrt{\frac{\epsilon_T}{1-\epsilon_T}} \Sigma_{n=1}^N u_n^T[y_n = g(x_n)] \\
+                             &= \sqrt{\frac{1-\epsilon_T}{\epsilon_T}} \epsilon_T \Sigma_{n=1}^N u_n^T + \sqrt{\frac{\epsilon_T}{1-\epsilon_T}} (1-\epsilon_T) Sigma_{n=1}^N u_n^T \\
+                             &= 2\sqrt{ \epsilon_T (1-\epsilon_T) } \Sigma_{n=1}^N u_n^T \\
+                             &= 2^T \Pi_{t=1}^T \sqrt{ \epsilon_t (1-\epsilon_t) }
+\end{align}
+$$
+
+## 10. (b)
+$$
+\begin{align}
+s_n &= s_n + \alpha_t g_t, \alpha_t = \frac{y_n-s_n}{g_t} \\
+    &= s_n + g(y_n-s_n)
+\end{align}
+$$
+
+``\pagebreak``
+
+# Coding
+```julia; echo=false, results="hidden"
+using Printf, LinearAlgebra
+
+include("../utils.jl")
+```
+
+```julia; results="hidden"
+features, labels = read_data("../train.txt")
+test_features, test_labels = read_data("../test.txt")
+```
+
+## 11. (c)
+```julia
+new_labels =  [i == 1. ? 1. : -1. for i = labels]
+model = train(new_labels, features; param="-t 0 -c 1 -q")
+coef = get_coefficient(model)
+
+@printf "||w|| = %.5f\n" norm(coef)
+```
+
+## 12. (b)
+```julia
+param = "-t 1 -d 2 -g 1 -r 1 -q"
+
+new_labels = [i == 2. ? 1. : -1. for i = labels]
+model2 = train(new_labels, features; param=param)
+@printf "Ein of model2: %5f\n" binary_error(model2; y=new_labels, x=features)
+
+new_labels = [i == 3. ? 1. : -1. for i = labels]
+model3 = train(new_labels, features; param=param)
+@printf "Ein of model3: %.5f\n" binary_error(model3; y=new_labels, x=features)
+
+new_labels = [i == 4. ? 1. : -1. for i = labels]
+model4 = train(new_labels, features; param=param)
+@printf "Ein of model4: %.5f\n" binary_error(model4; y=new_labels, x=features)
+
+new_labels = [i == 5. ? 1. : -1. for i = labels]
+model5 = train(new_labels, features; param=param)
+@printf "Ein of model5: %.5f\n" binary_error(model5; y=new_labels, x=features)
+
+new_labels = [i == 6. ? 1. : -1. for i = labels]
+model6 = train(new_labels, features; param=param)
+@printf "Ein of model6: %.5f\n" binary_error(model6; y=new_labels, x=features)
+```
+
+``\pagebreak``
+
+## 13 (b)
+```julia
+@printf "number of SV of model2: %.5f\n" model2.get_nr_sv()
+@printf "number of SV of model3: %.5f\n" model3.get_nr_sv()
+@printf "number of SV of model4: %.5f\n" model4.get_nr_sv()
+@printf "number of SV of model5: %.5f\n" model5.get_nr_sv()
+@printf "number of SV of model6: %.5f\n" model6.get_nr_sv()
+```
+
+## 14. (d)
+```julia
+new_labels = [i == 7. ? 1. : -1. for i = test_labels]
+
+model = train(
+    [i == 7. ? 1. : -1. for i = labels], 
+    features; 
+    param="-t 2 -g 1 -c 0.01 -q"
+)
+@printf "Eout when c=0.01: %.5f:\n" binary_error(model; y=new_labels, x=test_features)
+
+model = train(
+    [i == 7. ? 1. : -1. for i = labels], 
+    features; 
+    param="-t 2 -g 1 -c 0.1 -q"
+)
+@printf "Eout when c=0.1: %.5f:\n" binary_error(model; y=new_labels, x=test_features)
+
+model = train(
+    [i == 7. ? 1. : -1. for i = labels], 
+    features; 
+    param="-t 2 -g 1 -c 1 -q"
+)
+@printf "Eout when c=1: %.5f:\n" binary_error(model; y=new_labels, x=test_features)
+
+model = train(
+    [i == 7. ? 1. : -1. for i = labels], 
+    features; 
+    param="-t 2 -g 1 -c 10 -q"
+)
+@printf "Eout when c=10: %.5f:\n" binary_error(model; y=new_labels, x=test_features)
+
+model = train(
+    [i == 7. ? 1. : -1. for i = labels], 
+    features; 
+    param="-t 2 -g 1 -c 100 -q"
+)
+@printf "Eout when c=100: %.5f:\n" binary_error(model; y=new_labels, x=test_features)
+```
+
+
+## 15. (c)
+```julia
+model = train(
+    [i == 7. ? 1. : -1. for i = labels], 
+    features; 
+    param="-t 2 -g 0.1 -c 0.1 -q"
+)
+@printf "Eout when g=0.1: %.5f:\n" binary_error(model; y=new_labels, x=test_features)
+
+model = train(
+    [i == 7. ? 1. : -1. for i = labels], 
+    features; 
+    param="-t 2 -g 1 -c 0.1 -q"
+)
+@printf "Eout when g=1: %.5f:\n" binary_error(model; y=new_labels, x=test_features)
+
+model = train(
+    [i == 7. ? 1. : -1. for i = labels], 
+    features; 
+    param="-t 2 -g 10 -c 0.1 -q"
+)
+@printf "Eout when g=10: %.5f:\n" binary_error(model; y=new_labels, x=test_features)
+
+model = train(
+    [i == 7. ? 1. : -1. for i = labels], 
+    features; 
+    param="-t 2 -g 100 -c 0.1 -q"
+)
+@printf "Eout when g=100: %.5f:\n" binary_error(model; y=new_labels, x=test_features)
+
+model = train(
+    [i == 7. ? 1. : -1. for i = labels], 
+    features; 
+    param="-t 2 -g 1000 -c 0.1 -q"
+)
+@printf "Eout when g=1000: %.5f:\n" binary_error(model; y=new_labels, x=test_features)
+```
+
+``\pagebreak``
+
+## 16. (a)
+```julia; eval=false
+new_labels = [i == 7. ? 1 : -1 for i = labels]
+gamma = [0.1, 1, 10, 100, 1000]
+params = [
+    "-t 2 -g $g -c 0.1 -q"
+    for g in gamma
+]
+score = zeros(length(params))
+
+p = Progress(500, desc="Trials: ", color=:white, barlen=30)
+for _ = 1:500
+    res = pick_param_val(new_labels, features, param=params)
+    score[res.idx] += 1
+    next!(p)
+end
+print(score)
+```
+
+```julia; echo=false
+println([327.0, 0.0, 173.0, 0.0, 0.0])
+```
+
+## 17. (a)
+```julia
+idx = findall(x->(x == 11 || x == 26), labels)
+new_features = features[idx, :]
+new_labels = [i == 11 ? 1. : -1. for i = labels[idx]]
+
+idx = findall(x->(x == 11 || x == 26), test_labels)
+new_test_features = test_features[idx, :]
+new_test_labels = [i == 11 ? 1. : -1. for i = test_labels[idx]]
+
+pred, min_loss, max_loss, param = ada_boosting(new_features, new_labels)
+@printf "min Ein_g: %.5f" min_loss
+```
+
+## 18. (c)
+```julia
+@printf "max Ein_g: %.5f" max_loss
+```
+
+## 19 (a)
+```julia
+@printf "Ein_G: %.5f" mean(pred .!= new_labels)
+```
+
+## 20 (a)
+```julia
+@printf "Eout_G: %.5f" mean(predict(param, new_test_features) .!= new_test_labels)
+```
+
+``\pagebreak``
+
+# Code Reference
+```julia; eval=false
+using Printf, LinearAlgebra
+
+import DelimitedFiles: readdlm
+import FLoops: @floop
+import PyCall: pyimport
+import InvertedIndices: Not
+import ProgressMeter: Progress, next!
+using Distributions
+
+
+
+function read_data(path)
+    data = readdlm(path, ' ')[:, begin:end-1]
+    for j = axes(data, 2)
+        for i in axes(data, 1)
+            elem = data[i, j]
+            try
+                start = collect(findfirst(":", elem))[1]+1
+                data[i, j] = parse(Float64, elem[start:end])
+            catch
+            end
+            
+        end
+    end
+
+    features = Matrix{Float64}(hcat(ones(size(data, 1)), data[:, begin+1:end]))
+    label = Vector{Float64}(data[:, begin])
+    
+    return features, label
+end
+
+
+global libsvm = pyimport("libsvm.svmutil")
+
+
+function train(y, x; param)
+    param = libsvm.svm_parameter(param)
+    prob = libsvm.svm_problem(y, x)
+    model = libsvm.svm_train(prob, param)
+
+    return model
+end
+
+
+function get_coefficient(model)
+    sv_dict = model.get_SV()
+    sv = Matrix{Float64}(undef, length(sv_dict), length(sv_dict[1]))
+    for i = axes(sv, 1), j = axes(sv, 2)
+        sv[i, j] = sv_dict[i][j]
+    end
+    sv_coef = [i[1] for i in model.get_sv_coef()]
+
+    coef = sv' * sv_coef
+
+    return coef
+end
+
+
+function binary_error(model; y, x)
+    _, p_acc, _ = libsvm.svm_predict(y, x, model, "-q")
+    err = 1 - (p_acc[1]/100)
+
+    return err
+end
+
+
+struct ValResult{T}
+    idx::Int64
+    errs::Vector{Float64}
+    models::T
+end
+
+function pick_param(param, train_y, train_x, eval_y, eval_x)
+    models = [
+        train(train_y, train_x; param=i)
+        for i in param
+    ]
+    err  = binary_error.(models; y=eval_y, x=eval_x)
+    idx = argmin(err)
+    @inbounds model = models[idx]
+
+    return ValResult(idx, err, models)
+end
+function pick_param_val(y, x; param)
+    N = size(x, 1)
+    pos = sample(1:N, 2000, replace=false)
+    @inbounds train_x, eval_x = x[Not(pos), :], x[pos, :]
+    @inbounds train_y, eval_y = y[Not(pos)], y[pos]
+    res = pick_param(param, train_y, train_x, eval_y, eval_x)
+
+    return res, θ
+end
+
+
+check_sign(a) = a == 0. ? -1. : sign(a)
+predict(s::Real, x::Real, θ::Real) = s * check_sign(x - θ)
+predict(s::Real, x::AbstractVector, θ::Real) = predict.(Ref(s), x, Ref(θ))
+function decision_stump(features, labels)
+    n, k = size(features)
+    temp = vcat(  # (n+1) * k
+        reshape(fill(-Inf, k), 1, k),
+        reduce(hcat, sort.(eachcol(features)))
+    )
+    @inbounds θ = (temp[begin+1:end, :] + temp[begin:end-1, :]) / 2
+
+    pred = Array{Float64}(undef, n, n*k, 2)
+    for (κ, s) = enumerate([-1, 1])
+        @floop for (j, θⱼ) = enumerate(θ)
+            d = ceil(Int64, j/n)
+            pred[:, j, κ] = predict(s, features[:, d], θⱼ)
+        end 
+    end
+    incorrect_ptr = pred .== labels
+
+    return incorrect_ptr, pred, θ
+end
+
+
+function ada_boosting(features, labels; T=1000)
+    incorrect_ptr, pred, θ = decision_stump(features, labels)
+    
+    # model(decision stump) parameters
+    s = Vector{Float64}(undef, T)
+    theta = Vector{Float64}(undef, T)
+    d = Vector{Int64}(undef, T)
+
+    # aggegation weights for each sub-model(decision stump)
+    alpha = Vector{Float64}(undef, T)
+
+    n = size(pred, 1)
+    loss = Vector{Float64}(undef, T)
+    best_pred = Matrix{Float64}(undef, n, T)  # best prediction for each iterations
+    uₜ = fill(1/n, n)  # scaling factor for each iterations
+
+    p = Progress(T, desc="Boosting: ", color=:white, barlen=30)
+    @inbounds for t = eachindex(s, d, theta, alpha)
+        lossₜ = dropdims(mean(incorrect_ptr, dims=1); dims=1)
+        weighted_lossₜ = dropdims(mean(uₜ  .* incorrect_ptr, dims=1); dims=1)
+        
+        idx = argmin(weighted_lossₜ)
+        loss[t] = lossₜ[idx]
+        best_pred[:, t] = pred[:, idx]
+        
+        d[t] = ceil(Int64, idx[1]/n)
+        theta[t] = θ[idx[1]]
+        s[t] = [-1, 1][idx[2]]
+
+        opt_correct_ptr = best_pred[:, t] .== labels
+        opt_incorrect_ptr = best_pred[:, t] .!= labels
+
+        ϵₜ = (opt_incorrect_ptr' * uₜ) / sum(uₜ)
+        diamondₜ = sqrt((1-ϵₜ)/ϵₜ)
+        alpha[t] = log(diamondₜ)
+        
+        uₜ = (opt_incorrect_ptr .* uₜ) * diamondₜ + 
+             (opt_correct_ptr .* uₜ) / diamondₜ
+        next!(p)
+    end
+    param = (s=s, d=d, theta=theta, alpha=alpha)
+
+    return check_sign.(best_pred*alpha), minimum(loss),  maximum(loss), param
+end
+```
+
+``\pagebreak``
+
+```julia; eval=false
+function predict(param::NamedTuple, features)
+    weighted_pred = zeros(size(features, 1))
+    for (s, d, theta, alpha) in zip(values(param)...)
+        weighted_pred += alpha * predict(s, features[:, d], theta)
+    end
+
+    return check_sign.(weighted_pred)
+end
+```

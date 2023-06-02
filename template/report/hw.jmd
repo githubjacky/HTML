@@ -1,0 +1,33 @@
+---
+title: HW2 for Machine Learning
+author: Hsiu Hsuan Yeh
+date: 13th April 2023
+
+weave_options:
+    doctype: md2pdf
+    pandoc_options: --pdf-engine=xelatex
+    template: md2pdf.tpl
+    # fig_ext : .png
+    # fig_path: figure
+---
+
+
+# Multiple Choice
+## 1.
+
+``\pagebreak``
+
+# Coding
+```julia; echo=false, results="hidden"
+using Printf
+include("../utils.jl")
+```
+
+## 13. 
+
+``\pagebreak``
+
+# Code Reference
+```julia; eval=false
+using Printf
+```
