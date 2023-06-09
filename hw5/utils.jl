@@ -110,7 +110,7 @@ function decision_stump(features, labels)
             pred[:, j, κ] = predict(s, features[:, d], θⱼ)
         end 
     end
-    incorrect_ptr = pred .== labels
+    incorrect_ptr = pred .!= labels
 
     return incorrect_ptr, pred, θ
 end
