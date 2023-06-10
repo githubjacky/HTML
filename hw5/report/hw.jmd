@@ -296,13 +296,13 @@ idx = findall(x->(x == 11 || x == 26), test_labels)
 new_test_features = test_features[idx, :]
 new_test_labels = [i == 11 ? 1. : -1. for i = test_labels[idx]]
 
-pred, min_loss, max_loss, param = ada_boosting(new_features, new_labels)
-@printf "min Ein_g: %.5f" min_loss
+pred, loss, param = ada_boosting(new_features, new_labels)
+@printf "min Ein_g: %.5f" minimum(loss)
 ```
 
 ## 18. (c)
 ```julia
-@printf "max Ein_g: %.5f" max_loss
+@printf "max Ein_g: %.5f" maximum(loss)
 ```
 
 ## 19 (a)
@@ -441,9 +441,9 @@ function ada_boosting(features, labels; T=1000)
     incorrect_ptr, pred, θ = decision_stump(features, labels)
     
     # model(decision stump) parameters
-    s = Vector{Float64}(undef, T)
-    theta = Vector{Float64}(undef, T)
     d = Vector{Int64}(undef, T)
+    theta = Vector{Float64}(undef, T)
+    s = Vector{Float64}(undef, T)
 
     # aggegation weights for each sub-model(decision stump)
     alpha = Vector{Float64}(undef, T)
@@ -479,7 +479,7 @@ function ada_boosting(features, labels; T=1000)
     end
     param = (s=s, d=d, theta=theta, alpha=alpha)
 
-    return check_sign.(best_pred*alpha), minimum(loss),  maximum(loss), param
+    return check_sign.(best_pred*alpha), loss, param
 end
 ```
 
@@ -487,11 +487,13 @@ end
 
 ```julia; eval=false
 function predict(param::NamedTuple, features)
-    weighted_pred = zeros(size(features, 1))
-    for (s, d, theta, alpha) in zip(values(param)...)
-        weighted_pred += alpha * predict(s, features[:, d], theta)
+    s, d, theta, alpha = values(param)
+    weighted_pred = Matrix{Float64}(undef, size(features, 1), length(alpha))
+
+    for j = axes(weighted_pred, 2)
+        weighted_pred[:, j] = predict(s[j], features[:, d[j]], theta[j])
     end
 
-    return check_sign.(weighted_pred)
+    return check_sign.(weighted_pred * alpha)
 end
 ```

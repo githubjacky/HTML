@@ -453,8 +453,8 @@ $\pagebreak$
 (*@\HLJLn{new{\_}test{\_}features}@*) (*@\HLJLoB{=}@*) (*@\HLJLn{test{\_}features}@*)(*@\HLJLp{[}@*)(*@\HLJLn{idx}@*)(*@\HLJLp{,}@*) (*@\HLJLoB{:}@*)(*@\HLJLp{]}@*)
 (*@\HLJLn{new{\_}test{\_}labels}@*) (*@\HLJLoB{=}@*) (*@\HLJLp{[}@*)(*@\HLJLn{i}@*) (*@\HLJLoB{==}@*) (*@\HLJLni{11}@*) (*@\HLJLoB{?}@*) (*@\HLJLnfB{1.}@*) (*@\HLJLoB{:}@*) (*@\HLJLoB{-}@*)(*@\HLJLnfB{1.}@*) (*@\HLJLk{for}@*) (*@\HLJLn{i}@*) (*@\HLJLoB{=}@*) (*@\HLJLn{test{\_}labels}@*)(*@\HLJLp{[}@*)(*@\HLJLn{idx}@*)(*@\HLJLp{]]}@*)
 
-(*@\HLJLn{pred}@*)(*@\HLJLp{,}@*) (*@\HLJLn{min{\_}loss}@*)(*@\HLJLp{,}@*) (*@\HLJLn{max{\_}loss}@*)(*@\HLJLp{,}@*) (*@\HLJLn{param}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{ada{\_}boosting}@*)(*@\HLJLp{(}@*)(*@\HLJLn{new{\_}features}@*)(*@\HLJLp{,}@*) (*@\HLJLn{new{\_}labels}@*)(*@\HLJLp{)}@*)
-(*@\HLJLnd{@printf}@*) (*@\HLJLs{"{}min}@*) (*@\HLJLs{Ein{\_}g:}@*) (*@\HLJLs{{\%}.5f"{}}@*) (*@\HLJLn{min{\_}loss}@*)
+(*@\HLJLn{pred}@*)(*@\HLJLp{,}@*) (*@\HLJLn{loss}@*)(*@\HLJLp{,}@*) (*@\HLJLn{param}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{ada{\_}boosting}@*)(*@\HLJLp{(}@*)(*@\HLJLn{new{\_}features}@*)(*@\HLJLp{,}@*) (*@\HLJLn{new{\_}labels}@*)(*@\HLJLp{)}@*)
+(*@\HLJLnd{@printf}@*) (*@\HLJLs{"{}min}@*) (*@\HLJLs{Ein{\_}g:}@*) (*@\HLJLs{{\%}.5f"{}}@*) (*@\HLJLnf{minimum}@*)(*@\HLJLp{(}@*)(*@\HLJLn{loss}@*)(*@\HLJLp{)}@*)
 \end{lstlisting}
 
 \begin{lstlisting}
@@ -465,7 +465,7 @@ min Ein(*@{{\_}}@*)g: 0.09847
 \subsection{18. (c)}
 
 \begin{lstlisting}
-(*@\HLJLnd{@printf}@*) (*@\HLJLs{"{}max}@*) (*@\HLJLs{Ein{\_}g:}@*) (*@\HLJLs{{\%}.5f"{}}@*) (*@\HLJLn{max{\_}loss}@*)
+(*@\HLJLnd{@printf}@*) (*@\HLJLs{"{}max}@*) (*@\HLJLs{Ein{\_}g:}@*) (*@\HLJLs{{\%}.5f"{}}@*) (*@\HLJLnf{maximum}@*)(*@\HLJLp{(}@*)(*@\HLJLn{loss}@*)(*@\HLJLp{)}@*)
 \end{lstlisting}
 
 \begin{lstlisting}
@@ -622,9 +622,9 @@ $\pagebreak$
     (*@\HLJLn{incorrect{\_}ptr}@*)(*@\HLJLp{,}@*) (*@\HLJLn{pred}@*)(*@\HLJLp{,}@*) (*@\HLJLn{\ensuremath{\theta}}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{decision{\_}stump}@*)(*@\HLJLp{(}@*)(*@\HLJLn{features}@*)(*@\HLJLp{,}@*) (*@\HLJLn{labels}@*)(*@\HLJLp{)}@*)
     
     (*@\HLJLcs{{\#}}@*) (*@\HLJLcs{model(decision}@*) (*@\HLJLcs{stump)}@*) (*@\HLJLcs{parameters}@*)
-    (*@\HLJLn{s}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{Vector}@*)(*@\HLJLp{{\{}}@*)(*@\HLJLn{Float64}@*)(*@\HLJLp{{\}}(}@*)(*@\HLJLn{undef}@*)(*@\HLJLp{,}@*) (*@\HLJLn{T}@*)(*@\HLJLp{)}@*)
-    (*@\HLJLn{theta}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{Vector}@*)(*@\HLJLp{{\{}}@*)(*@\HLJLn{Float64}@*)(*@\HLJLp{{\}}(}@*)(*@\HLJLn{undef}@*)(*@\HLJLp{,}@*) (*@\HLJLn{T}@*)(*@\HLJLp{)}@*)
     (*@\HLJLn{d}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{Vector}@*)(*@\HLJLp{{\{}}@*)(*@\HLJLn{Int64}@*)(*@\HLJLp{{\}}(}@*)(*@\HLJLn{undef}@*)(*@\HLJLp{,}@*) (*@\HLJLn{T}@*)(*@\HLJLp{)}@*)
+    (*@\HLJLn{theta}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{Vector}@*)(*@\HLJLp{{\{}}@*)(*@\HLJLn{Float64}@*)(*@\HLJLp{{\}}(}@*)(*@\HLJLn{undef}@*)(*@\HLJLp{,}@*) (*@\HLJLn{T}@*)(*@\HLJLp{)}@*)
+    (*@\HLJLn{s}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{Vector}@*)(*@\HLJLp{{\{}}@*)(*@\HLJLn{Float64}@*)(*@\HLJLp{{\}}(}@*)(*@\HLJLn{undef}@*)(*@\HLJLp{,}@*) (*@\HLJLn{T}@*)(*@\HLJLp{)}@*)
 
     (*@\HLJLcs{{\#}}@*) (*@\HLJLcs{aggegation}@*) (*@\HLJLcs{weights}@*) (*@\HLJLcs{for}@*) (*@\HLJLcs{each}@*) (*@\HLJLcs{sub-model(decision}@*) (*@\HLJLcs{stump)}@*)
     (*@\HLJLn{alpha}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{Vector}@*)(*@\HLJLp{{\{}}@*)(*@\HLJLn{Float64}@*)(*@\HLJLp{{\}}(}@*)(*@\HLJLn{undef}@*)(*@\HLJLp{,}@*) (*@\HLJLn{T}@*)(*@\HLJLp{)}@*)
@@ -660,7 +660,7 @@ $\pagebreak$
     (*@\HLJLk{end}@*)
     (*@\HLJLn{param}@*) (*@\HLJLoB{=}@*) (*@\HLJLp{(}@*)(*@\HLJLn{s}@*)(*@\HLJLoB{=}@*)(*@\HLJLn{s}@*)(*@\HLJLp{,}@*) (*@\HLJLn{d}@*)(*@\HLJLoB{=}@*)(*@\HLJLn{d}@*)(*@\HLJLp{,}@*) (*@\HLJLn{theta}@*)(*@\HLJLoB{=}@*)(*@\HLJLn{theta}@*)(*@\HLJLp{,}@*) (*@\HLJLn{alpha}@*)(*@\HLJLoB{=}@*)(*@\HLJLn{alpha}@*)(*@\HLJLp{)}@*)
 
-    (*@\HLJLk{return}@*) (*@\HLJLn{check{\_}sign}@*)(*@\HLJLoB{.}@*)(*@\HLJLp{(}@*)(*@\HLJLn{best{\_}pred}@*)(*@\HLJLoB{*}@*)(*@\HLJLn{alpha}@*)(*@\HLJLp{),}@*) (*@\HLJLnf{minimum}@*)(*@\HLJLp{(}@*)(*@\HLJLn{loss}@*)(*@\HLJLp{),}@*)  (*@\HLJLnf{maximum}@*)(*@\HLJLp{(}@*)(*@\HLJLn{loss}@*)(*@\HLJLp{),}@*) (*@\HLJLn{param}@*)
+    (*@\HLJLk{return}@*) (*@\HLJLn{check{\_}sign}@*)(*@\HLJLoB{.}@*)(*@\HLJLp{(}@*)(*@\HLJLn{best{\_}pred}@*)(*@\HLJLoB{*}@*)(*@\HLJLn{alpha}@*)(*@\HLJLp{),}@*) (*@\HLJLn{loss}@*)(*@\HLJLp{,}@*) (*@\HLJLn{param}@*)
 (*@\HLJLk{end}@*)
 \end{lstlisting}
 
@@ -669,12 +669,14 @@ $\pagebreak$
 
 \begin{lstlisting}
 (*@\HLJLk{function}@*) (*@\HLJLnf{predict}@*)(*@\HLJLp{(}@*)(*@\HLJLn{param}@*)(*@\HLJLoB{::}@*)(*@\HLJLn{NamedTuple}@*)(*@\HLJLp{,}@*) (*@\HLJLn{features}@*)(*@\HLJLp{)}@*)
-    (*@\HLJLn{weighted{\_}pred}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{zeros}@*)(*@\HLJLp{(}@*)(*@\HLJLnf{size}@*)(*@\HLJLp{(}@*)(*@\HLJLn{features}@*)(*@\HLJLp{,}@*) (*@\HLJLni{1}@*)(*@\HLJLp{))}@*)
-    (*@\HLJLk{for}@*) (*@\HLJLp{(}@*)(*@\HLJLn{s}@*)(*@\HLJLp{,}@*) (*@\HLJLn{d}@*)(*@\HLJLp{,}@*) (*@\HLJLn{theta}@*)(*@\HLJLp{,}@*) (*@\HLJLn{alpha}@*)(*@\HLJLp{)}@*) (*@\HLJLkp{in}@*) (*@\HLJLnf{zip}@*)(*@\HLJLp{(}@*)(*@\HLJLnf{values}@*)(*@\HLJLp{(}@*)(*@\HLJLn{param}@*)(*@\HLJLp{)}@*)(*@\HLJLoB{...}@*)(*@\HLJLp{)}@*)
-        (*@\HLJLn{weighted{\_}pred}@*) (*@\HLJLoB{+=}@*) (*@\HLJLn{alpha}@*) (*@\HLJLoB{*}@*) (*@\HLJLnf{predict}@*)(*@\HLJLp{(}@*)(*@\HLJLn{s}@*)(*@\HLJLp{,}@*) (*@\HLJLn{features}@*)(*@\HLJLp{[}@*)(*@\HLJLoB{:}@*)(*@\HLJLp{,}@*) (*@\HLJLn{d}@*)(*@\HLJLp{],}@*) (*@\HLJLn{theta}@*)(*@\HLJLp{)}@*)
+    (*@\HLJLn{s}@*)(*@\HLJLp{,}@*) (*@\HLJLn{d}@*)(*@\HLJLp{,}@*) (*@\HLJLn{theta}@*)(*@\HLJLp{,}@*) (*@\HLJLn{alpha}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{values}@*)(*@\HLJLp{(}@*)(*@\HLJLn{param}@*)(*@\HLJLp{)}@*)
+    (*@\HLJLn{weighted{\_}pred}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{Matrix}@*)(*@\HLJLp{{\{}}@*)(*@\HLJLn{Float64}@*)(*@\HLJLp{{\}}(}@*)(*@\HLJLn{undef}@*)(*@\HLJLp{,}@*) (*@\HLJLnf{size}@*)(*@\HLJLp{(}@*)(*@\HLJLn{features}@*)(*@\HLJLp{,}@*) (*@\HLJLni{1}@*)(*@\HLJLp{),}@*) (*@\HLJLnf{length}@*)(*@\HLJLp{(}@*)(*@\HLJLn{alpha}@*)(*@\HLJLp{))}@*)
+
+    (*@\HLJLk{for}@*) (*@\HLJLn{j}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{axes}@*)(*@\HLJLp{(}@*)(*@\HLJLn{weighted{\_}pred}@*)(*@\HLJLp{,}@*) (*@\HLJLni{2}@*)(*@\HLJLp{)}@*)
+        (*@\HLJLn{weighted{\_}pred}@*)(*@\HLJLp{[}@*)(*@\HLJLoB{:}@*)(*@\HLJLp{,}@*) (*@\HLJLn{j}@*)(*@\HLJLp{]}@*) (*@\HLJLoB{=}@*) (*@\HLJLnf{predict}@*)(*@\HLJLp{(}@*)(*@\HLJLn{s}@*)(*@\HLJLp{[}@*)(*@\HLJLn{j}@*)(*@\HLJLp{],}@*) (*@\HLJLn{features}@*)(*@\HLJLp{[}@*)(*@\HLJLoB{:}@*)(*@\HLJLp{,}@*) (*@\HLJLn{d}@*)(*@\HLJLp{[}@*)(*@\HLJLn{j}@*)(*@\HLJLp{]],}@*) (*@\HLJLn{theta}@*)(*@\HLJLp{[}@*)(*@\HLJLn{j}@*)(*@\HLJLp{])}@*)
     (*@\HLJLk{end}@*)
 
-    (*@\HLJLk{return}@*) (*@\HLJLn{check{\_}sign}@*)(*@\HLJLoB{.}@*)(*@\HLJLp{(}@*)(*@\HLJLn{weighted{\_}pred}@*)(*@\HLJLp{)}@*)
+    (*@\HLJLk{return}@*) (*@\HLJLn{check{\_}sign}@*)(*@\HLJLoB{.}@*)(*@\HLJLp{(}@*)(*@\HLJLn{weighted{\_}pred}@*) (*@\HLJLoB{*}@*) (*@\HLJLn{alpha}@*)(*@\HLJLp{)}@*)
 (*@\HLJLk{end}@*)
 \end{lstlisting}
 
